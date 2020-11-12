@@ -3,7 +3,7 @@ package lotto.domain
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-internal class TestGoodTest {
+internal class GoodTestTest {
 
     @Test
     fun test() {
@@ -16,5 +16,14 @@ internal class TestGoodTest {
 
         // then
         assertThat(sum).isEqualTo(55)
+    }
+
+    @Test
+    fun otherTest() {
+        // given
+        val goodTest = GoodTest()
+
+        // then
+        assertThat(goodTest.otherFunction()).isEqualTo(5)
     }
 }

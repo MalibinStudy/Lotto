@@ -61,7 +61,7 @@ tasks.jacocoTestCoverageVerification {
             limit {
                 counter = "LINE"
                 value = "TOTALCOUNT"
-                maximum = 12.toBigDecimal()
+                maximum = 10.toBigDecimal()
             }
 
             excludes = listOf(
@@ -73,6 +73,8 @@ tasks.jacocoTestCoverageVerification {
             element = "CLASS"
 
             limit {
+                counter = "INSTRUCTION"
+                value = "COVEREDRATIO"
                 minimum = "0.60".toBigDecimal()
             }
 
