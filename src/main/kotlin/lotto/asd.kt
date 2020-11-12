@@ -1,5 +1,9 @@
 package lotto
 
 fun main() {
-    println(44444)
+    println(TestSam { 2 })
+}
+
+fun interface TestSam {
+    fun function(int: Int): Int
 }
