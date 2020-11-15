@@ -8,7 +8,7 @@ object Validation {
     }
 
     private fun isEndBiggerThanStart(start: Int, end: Int) {
-        require(start < end) { "로또의 시작 범위(${start})는 끝(${end})보다 커야합니다." }
+        require(start < end) { "로또의 시작 범위($start)는 끝($end)보다 커야합니다." }
     }
 
     private fun isSizeFitted(winningNumberList: List<Int>) {
@@ -21,8 +21,9 @@ object Validation {
     private fun isListSorted(winningNumberList: List<Int>) {
         val sortedWinningNumberList = winningNumberList.sorted()
         require(sortedWinningNumberList.filterIndexed { index, _ ->
-            sortedWinningNumberList[index] == winningNumberList[index]
-        }.size == sortedWinningNumberList.size) {
+                sortedWinningNumberList[index] == winningNumberList[index]
+            }.size == sortedWinningNumberList.size
+        ) {
             "입력하신 번호는 로또 당첨 번호가 아닙니다: 정렬이 안되어 있습니다."
         }
     }

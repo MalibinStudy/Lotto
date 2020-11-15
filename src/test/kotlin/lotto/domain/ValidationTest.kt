@@ -33,7 +33,7 @@ internal class ValidationTest {
 
         Assertions.assertThatThrownBy { Validation.validateRangeInputs(start, end) }
             .isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessage("로또의 시작 범위(${start})는 끝(${end})보다 커야합니다.")
+            .hasMessage("로또의 시작 범위($start)는 끝($end)보다 커야합니다.")
     }
 
     @Test
@@ -42,8 +42,8 @@ internal class ValidationTest {
 
         Assertions.assertThatThrownBy { Validation.validateWinningNumbers(inputNumberList) }
             .isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessage("당첨번호의 길이(${inputNumberList.size})가 " +
-                    "입력하신 번호는 로또 당첨 번호가 아닙니다: 로또의 길이(${DrawingMachine.LOTTO_LENGTH})와 맞지 않습니다."
+            .hasMessage(
+                "당첨번호의 길이(${inputNumberList.size})가 입력하신 번호는 로또 당첨 번호가 아닙니다: 로또의 길이(${DrawingMachine.LOTTO_LENGTH})와 맞지 않습니다."
             )
     }
 

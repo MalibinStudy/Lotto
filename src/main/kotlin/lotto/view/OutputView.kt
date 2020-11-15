@@ -37,11 +37,9 @@ object OutputView {
         println("총 수익률은 ${myWinningPrize.toDouble() / lotteryWallet.getMyMoney()}입니다.")
     }
 
-
     private const val FIRST_PRIZE = 2000000000L
     private const val SECOND_PRIZE = 1500000L
     private const val THIRD_PRIZE = 50000L
     private const val FOURTH_PRIZE = 5000L
-
     private const val BLANK = ""
 }

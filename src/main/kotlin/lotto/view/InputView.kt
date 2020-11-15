@@ -2,7 +2,6 @@ package lotto.view
 
 import lotto.domain.Validation
 import java.util.regex.Pattern
-import kotlin.IllegalArgumentException
 
 object InputView {
     fun getPurchasePrice(): Int {
@@ -18,6 +17,4 @@ object InputView {
         Validation.validateWinningNumbers(winningNumberList!!)
         return winningNumberList
     }
-
 }
-

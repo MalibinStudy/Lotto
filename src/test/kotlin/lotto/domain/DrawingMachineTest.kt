@@ -11,7 +11,7 @@ internal class DrawingMachineTest {
 
         Assertions.assertThatThrownBy { DrawingMachine(start, end) }
             .isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessage("로또의 시작 범위(${start})는 끝(${end})보다 커야합니다.")
+            .hasMessage("로또의 시작 범위($start)는 끝($end)보다 커야합니다.")
     }
 
     @Test
@@ -21,6 +21,6 @@ internal class DrawingMachineTest {
 
         Assertions.assertThatThrownBy { DrawingMachine(start, end) }
             .isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessage("로또의 시작 범위(${start})는 끝(${end})보다 커야합니다.")
+            .hasMessage("로또의 시작 범위($start)는 끝($end)보다 커야합니다.")
     }
 }
