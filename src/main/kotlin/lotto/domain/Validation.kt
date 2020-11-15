@@ -13,19 +13,15 @@ object Validation {
 
     private fun isSizeFitted(winningNumberList: List<Int>) {
         require(winningNumberList.size == DrawingMachine.LOTTO_LENGTH) {
-            "당첨번호의 길이(${winningNumberList.size})가 " +
-                    "입력하신 번호는 로또 당첨 번호가 아닙니다: 로또의 길이(${DrawingMachine.LOTTO_LENGTH})와 맞지 않습니다."
+            "당첨번호의 길이(${winningNumberList.size})가 입력하신 번호는 로또 당첨 번호가 아닙니다: 로또의 길이(${DrawingMachine.LOTTO_LENGTH})와 맞지 않습니다."
         }
     }
 
     private fun isListSorted(winningNumberList: List<Int>) {
         val sortedWinningNumberList = winningNumberList.sorted()
-        require(sortedWinningNumberList.filterIndexed { index, _ ->
-                sortedWinningNumberList[index] == winningNumberList[index]
-            }.size == sortedWinningNumberList.size
-        ) {
-            "입력하신 번호는 로또 당첨 번호가 아닙니다: 정렬이 안되어 있습니다."
-        }
+        require(sortedWinningNumberList.filterIndexed
+        { index, _ -> sortedWinningNumberList[index] == winningNumberList[index] }
+            .size == sortedWinningNumberList.size) { "입력하신 번호는 로또 당첨 번호가 아닙니다: 정렬이 안되어 있습니다." }
     }
 
     fun validatePrice(price: Int) {
