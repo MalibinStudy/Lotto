@@ -4,7 +4,6 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
-
 internal class LottoTest {
     @DisplayName("로또 번호 생성하기")
     @Test
@@ -27,5 +26,4 @@ internal class LottoTest {
         // then
         assertThat(lotto.getLottoNums()).isNotNull
     }
-
 }

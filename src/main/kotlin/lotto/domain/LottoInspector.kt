@@ -1,8 +1,7 @@
 package lotto.domain
 
 class LottoInspector {
-
-    fun inspectAll(generatedLottos: List<Lotto>, winningLotto: List<Int>): Map<Lotto,Int> {
+    fun inspectAll(generatedLottos: List<Lotto>, winningLotto: List<Int>): Map<Lotto, Int> {
         val inspectResult = mutableMapOf<Lotto, Int>()
         generatedLottos.forEach { lotto ->
             val correctCount = getCorrectCount(lotto, winningLotto)
@@ -19,5 +18,4 @@ class LottoInspector {
         }
         return correctCount
     }
-
 }

@@ -9,11 +9,11 @@ internal class LottoInspectorTest {
         // given
         val lottoInspector = LottoInspector()
         val lottoGenerator = LottoGenerator()
-        val winningLotto = listOf(1,3,5,7,9,11)
+        val winningLotto = listOf(1, 3, 5, 7, 9, 11)
 
         // when
         val generatedLottos = lottoGenerator.generateLotto(10)
         // then
-        assertThat(lottoInspector.inspectAll(generatedLottos,winningLotto).size).isEqualTo(10)
+        assertThat(lottoInspector.inspectAll(generatedLottos, winningLotto).size).isEqualTo(10)
     }
 }

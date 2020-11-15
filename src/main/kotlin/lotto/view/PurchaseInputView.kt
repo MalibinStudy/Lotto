@@ -3,7 +3,7 @@ package lotto.view
 class PurchaseInputView {
     fun getPurchasePrice(): Int {
         println("구매 금액을 입력해주세요.")
-        return stringToNum (readLine()!!)
+        return stringToNum(readLine()!!)
     }
 
     private fun stringToNum(string: String): Int {

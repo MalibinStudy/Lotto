@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
-internal class LottoGeneratorTest{
+internal class LottoGeneratorTest {
     @DisplayName("가격 넣으면 개수 반환 테스트")
     @Test
     fun countLottoNumTest() {
