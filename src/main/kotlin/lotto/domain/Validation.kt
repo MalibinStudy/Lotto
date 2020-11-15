@@ -21,8 +21,7 @@ object Validation {
         val sortedWinningNumberList = winningNumberList.sorted()
         require(
             sortedWinningNumberList.filterIndexed
-            { index, _ -> sortedWinningNumberList[index] == winningNumberList[index] }
-            .size == sortedWinningNumberList.size
+            { index, _ -> sortedWinningNumberList[index] == winningNumberList[index] }.size == sortedWinningNumberList.size
         ) { "입력하신 번호는 로또 당첨 번호가 아닙니다: 정렬이 안되어 있습니다." }
     }
 
