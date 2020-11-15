@@ -22,6 +22,10 @@ configure<JavaPluginConvention> {
     sourceCompatibility = JavaVersion.VERSION_1_8
 }
 
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
+
 tasks {
     compileKotlin {
         kotlinOptions.jvmTarget = "1.8"
@@ -30,7 +34,11 @@ tasks {
         kotlinOptions.jvmTarget = "1.8"
     }
     test {
-        useJUnitPlatform()
+        extensions.configure(JacocoTaskExtension::class) {
+            destinationFile = file("$buildDir/jacoco/jacoco.exec")
+        }
+
+        finalizedBy("jacocoTestReport")
     }
     ktlint {
         verbose.set(true)
@@ -64,8 +72,8 @@ tasks.jacocoTestCoverageVerification {
                 maximum = 10.toBigDecimal()
             }
 
-            excludes = listOf(
-                "*.view.*"
+            includes = listOf(
+                "*.domain.*"
             )
         }
 
@@ -78,8 +86,8 @@ tasks.jacocoTestCoverageVerification {
                 minimum = "0.60".toBigDecimal()
             }
 
-            excludes = listOf(
-                "*.view.*"
+            includes = listOf(
+                "*.domain.*"
             )
         }
     }
