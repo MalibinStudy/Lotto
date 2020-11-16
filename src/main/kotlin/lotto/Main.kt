@@ -1,25 +1,27 @@
-import lotto.domain.LottoGenerator
-import lotto.domain.LottoInspector
+import lotto.domain.LottoShop
+import lotto.domain.ProfitCalculator
+import lotto.domain.WinnerChecker
 import lotto.view.PurchaseInputView
 import lotto.view.PurchaseLottoResultView
-import lotto.view.WinLottoResultView
+import lotto.view.ResultView
 import lotto.view.WinningInputView
-import lotto.view.BuyLottoResultView
 
 fun main() {
     val purchasePrice = PurchaseInputView().getPurchasePrice()
 
-    val lottoGenerator = LottoGenerator()
-    val numOfLottos = lottoGenerator.countLottoNum(purchasePrice)
-    val generatedLottos = lottoGenerator.generateLotto(numOfLottos)
+    val lottoShop = LottoShop()
+    val purchasedLottos = lottoShop.purchaseLottos(purchasePrice)
 
-    PurchaseLottoResultView().showLottos(numOfLottos, generatedLottos)
+    PurchaseLottoResultView().showLottos(purchasedLottos)
 
-    val winningLotto = WinningInputView().requestWinningLottoNum()
+    val winningLotto = WinningInputView().requestWinningLotto()
 
-    val lottoWinInspector = LottoInspector()
-    val inspectResult = lottoWinInspector.inspectAll(generatedLottos, winningLotto)
+    val winnerChecker = WinnerChecker()
+    val winLottos = winnerChecker.getWinLottos(purchasedLottos, winningLotto)
 
-    WinLottoResultView().showWinner(inspectResult)
-    BuyLottoResultView().showProfitRatio(inspectResult, purchasePrice)
+    val profitCalculator = ProfitCalculator()
+    val totalProfit = profitCalculator.getTotalProfit(winLottos)
+    val profitRatio = profitCalculator.getProfitRatio(purchasePrice, totalProfit)
+
+    ResultView().showWinProfit(winLottos, profitRatio)
 }

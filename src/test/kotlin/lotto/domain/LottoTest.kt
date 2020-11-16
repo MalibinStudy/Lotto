@@ -1,29 +1,19 @@
 package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 internal class LottoTest {
-    @DisplayName("로또 번호 생성하기")
     @Test
-    fun createLottoNumsTest() {
+    fun getCorrectCountToOtherTest() {
         // given
-        val lotto = Lotto()
-        // when
-        lotto.createLottoNums()
-        // then
-        assertThat(lotto.getLottoNums().size).isEqualTo(6)
-    }
+        val lottoNum = listOf(1, 2, 3, 4, 5, 6)
+        val otherLottoNum = listOf(1, 2, 3, 4, 10, 11)
 
-    @DisplayName("로또 번호 리스트 가져오기")
-    @Test
-    fun getLottoNumsTest() {
-        // given
-        val lotto = Lotto()
         // when
-
+        val lotto = Lotto(lottoNum)
+        val otherLotto = Lotto(otherLottoNum)
         // then
-        assertThat(lotto.getLottoNums()).isNotNull
+        assertThat(lotto.getCorrectCountToOther(otherLotto)).isEqualTo(4)
     }
 }
