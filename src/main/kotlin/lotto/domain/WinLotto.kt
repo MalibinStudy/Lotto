@@ -17,9 +17,7 @@ enum class WinLotto(
         winnerCount = count
     }
 
-    fun getWinnerCount(): Int {
-        return winnerCount
-    }
+    fun getWinnerCount() = winnerCount
 
     private fun hasCorrectNum(correctNum: Int): Boolean {
         return this.correctNum == correctNum

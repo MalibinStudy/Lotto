@@ -1,7 +1,7 @@
 package lotto.view
 
-import lotto.domain.InputChecker
 import lotto.domain.Lotto
+import lotto.domain.WinningInputChecker
 
 class WinningInputView {
     fun requestWinningLotto(): Lotto {
@@ -12,7 +12,7 @@ class WinningInputView {
 
     private fun getWinLottoNum(numsString: String): Lotto {
         val winnerNumsString = numsString.split(DELIMITER)
-        InputChecker.checkWinLottoNum(winnerNumsString)
+        WinningInputChecker().checkWinLottoNum(winnerNumsString)
         val winLottoNums = winnerNumsString.map { it.toInt() }
         return Lotto(winLottoNums)
     }

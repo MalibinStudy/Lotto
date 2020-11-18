@@ -3,11 +3,11 @@ package lotto.domain
 class LottoShop {
     fun purchaseLottos(purchasePrice: Int): List<Lotto> {
         val numOfLottos = purchasePrice / LOTTO_PRICE_UNIT
-        return List(numOfLottos) { generateLottos(LottoNumGenerator.getGeneratedLottoNums()) }
+        return List(numOfLottos) { generateLottos() }
     }
 
-    private fun generateLottos(lottoNums: List<Int>): Lotto {
-        return Lotto(lottoNums)
+    private fun generateLottos(): Lotto {
+        return Lotto(LottoNumGenerator.getGeneratedLottoNums())
     }
 
     companion object {
