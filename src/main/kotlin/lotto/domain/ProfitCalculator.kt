@@ -11,11 +11,10 @@ class ProfitCalculator {
         mapOfResult.forEach {
             totalPrize += it.key * it.value
         }
-
         return totalPrize / InputView.amountOfLotto!! * 0.01
     }
 
-    fun rankResult(lottoList: List<List<Int>>): Map<Int, Int> {
+    private fun rankResult(lottoList: List<List<Int>>): Map<Int, Int> {
         val winnerChecker = WinnerChecker()
         val mapOfLotteryResult = winnerChecker.checkLotteryResult(lottoList)
 

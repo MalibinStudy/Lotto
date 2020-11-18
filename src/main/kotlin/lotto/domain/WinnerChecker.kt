@@ -3,7 +3,7 @@ package lotto.domain
 import lotto.view.InputView
 
 class WinnerChecker {
-    val winningNumber = InputView.winningNumberList
+    private val winningNumber = InputView.winningNumberList
 
     fun checkEachLotto(lottoNumber: List<Int>): Int {
 

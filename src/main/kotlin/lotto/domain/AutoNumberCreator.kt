@@ -14,12 +14,12 @@ class AutoNumberCreator {
         return everyLottoList
     }
 
-    fun createAutoNumber(): List<Int> {
+    private fun createAutoNumber(): List<Int> {
         return NUMBER_RANGE.shuffled().take(COUNT_OF_LOTTO_NUMBER).sorted()
     }
 
     companion object {
-        val NUMBER_RANGE = 1..46
-        const val COUNT_OF_LOTTO_NUMBER = 6
+        private val NUMBER_RANGE = 1..46
+        private const val COUNT_OF_LOTTO_NUMBER = 6
     }
 }
