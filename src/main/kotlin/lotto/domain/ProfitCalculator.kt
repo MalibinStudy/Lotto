@@ -11,7 +11,7 @@ class ProfitCalculator {
         mapOfResult.forEach {
             totalPrize += it.key * it.value
         }
-        return totalPrize / InputView.amountOfLotto!! * 0.01
+        return totalPrize / InputView.amountOfLotto!!
     }
 
     private fun rankResult(lottoList: List<List<Int>>): Map<Int, Int> {
