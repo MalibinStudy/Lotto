@@ -6,20 +6,14 @@ import org.junit.jupiter.api.Test
 internal class LottoNumGeneratorTest {
     @Test
     fun generateRandomNumsTest() {
+        // given
+        val lottoNumGenerator = LottoNumGenerator()
         // when
-        val randomNums = LottoNumGenerator.getGeneratedLottoNums()
+        val randomNums = lottoNumGenerator.generateRandomNums()
         // then
         randomNums.forEach {
-            assertThat(it).isLessThan(46)
-            assertThat(it).isGreaterThan(0)
+            assertThat(it.getLottoNum()).isLessThan(46)
+            assertThat(it.getLottoNum()).isGreaterThan(0)
         }
-    }
-
-    @Test
-    fun getGeneratedLottoNumsTest() {
-        // when
-        val randomNums = LottoNumGenerator.getGeneratedLottoNums()
-        // then
-        assertThat(randomNums.size).isEqualTo(6)
     }
 }

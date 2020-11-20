@@ -5,7 +5,33 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import java.lang.IllegalArgumentException
 
-internal class WinningInputCheckerTest {
+internal class InputCheckerTest {
+    private val inputChecker = InputChecker()
+
+    @DisplayName("가격 입력시 숫자가 아닌 경우 에러 테스트")
+    @Test
+    fun checkPurchasePriceTest() {
+        // given
+        val notNumString = "a"
+
+        // then
+        Assertions.assertThatThrownBy { inputChecker.checkPurchasePrice(notNumString) }
+            .isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessage("숫자가 입력되어야 합니다. 입력값: $notNumString")
+    }
+
+    @DisplayName("가격 입력시 1000원 미만인 경우 에러 테스트")
+    @Test
+    fun lottoNumCheckTest() {
+        // given
+        val priceNum = "900"
+
+        // then
+        Assertions.assertThatThrownBy { inputChecker.checkPurchasePrice(priceNum) }
+            .isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessage("로또 하나의 가격은 1000원입니다. 1000원 이상 입력해주세요\n 입력값: $priceNum")
+    }
+
     @DisplayName("입력된 가격이 숫자가 아닌 경우")
     @Test
     fun checkWinLottoNumTest() {
@@ -13,7 +39,7 @@ internal class WinningInputCheckerTest {
         val winnerNumsString = listOf("1", "2", "3", "4", "5", "a")
 
         // then
-        Assertions.assertThatThrownBy { WinningInputChecker().checkWinLottoNum(winnerNumsString) }
+        Assertions.assertThatThrownBy { inputChecker.checkWinLottoNum(winnerNumsString) }
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage("숫자만 적어주세요 \n입력값: $winnerNumsString")
     }
@@ -25,7 +51,7 @@ internal class WinningInputCheckerTest {
         val winnerNumsString = listOf("1", "2", "3", "4", "5")
 
         // then
-        Assertions.assertThatThrownBy { WinningInputChecker().checkWinLottoNum(winnerNumsString) }
+        Assertions.assertThatThrownBy { inputChecker.checkWinLottoNum(winnerNumsString) }
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage("당첨 번호를 잘못 입력하셨습니다. \n입력값: $winnerNumsString \n개수와 띄어쓰기에 유의하여 다음과 같이 입력해주세요 : 1, 2, 5, 7, 14, 23")
     }
@@ -40,7 +66,7 @@ internal class WinningInputCheckerTest {
         val winnerNums = winnerNumsString.map { it.toInt() }
 
         // then
-        Assertions.assertThatThrownBy { WinningInputChecker().checkWinLottoNum(winnerNumsString) }
+        Assertions.assertThatThrownBy { inputChecker.checkWinLottoNum(winnerNumsString) }
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage("당첨 번호는 1~45 사이의 숫자만 가능합니다 \n입력값: $winnerNums")
     }

@@ -1,15 +1,14 @@
 package lotto.domain
 
-object LottoNumGenerator {
-    fun getGeneratedLottoNums(): List<Int> {
-        return generateRandomNums().take(LOTTO_ENTRY_NUM)
-    }
+import lotto.domain.data.LottoNum
+import lotto.domain.data.LottoNum.Companion.MAXIMUM_LOTTO_NUM
+import lotto.domain.data.LottoNum.Companion.MINIMUM_LOTTO_NUM
 
-    private fun generateRandomNums(): List<Int> {
-        return (MINIMUM_LOTTO_NUM..MAXIMUM_LOTTO_NUM).shuffled()
-    }
+class LottoNumGenerator {
+    private val lottoNumRange = MINIMUM_LOTTO_NUM..MAXIMUM_LOTTO_NUM
 
-    private const val MINIMUM_LOTTO_NUM = 1
-    private const val MAXIMUM_LOTTO_NUM = 45
-    private const val LOTTO_ENTRY_NUM = 6
+    fun generateRandomNums(): List<LottoNum> {
+        return lottoNumRange.map { LottoNum(it) }
+            .shuffled()
+    }
 }

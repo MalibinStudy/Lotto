@@ -1,23 +1,15 @@
-package lotto.domain
+package lotto.domain.data
 
 import java.lang.IllegalArgumentException
 
 enum class WinLotto(
     private val correctNum: Int,
-    val winPrice: Int,
-    val calculateWinPrice: (Int) -> Long
+    val winPrice: Int
 ) {
-    CORRECT_THREE(3, 5000, { num -> num * 5000L }),
-    CORRECT_FOUR(4, 50000, { num -> num * 50000L }),
-    CORRECT_FIVE(5, 1500000, { num -> num * 1500000L }),
-    CORRECT_SIX(6, 2000000000, { num -> num * 2000000000L });
-
-    private var winnerCount = 0
-    fun setWinnerCount(count: Int) {
-        winnerCount = count
-    }
-
-    fun getWinnerCount() = winnerCount
+    CORRECT_THREE(3, 5_000),
+    CORRECT_FOUR(4, 50_000),
+    CORRECT_FIVE(5, 1_500_000),
+    CORRECT_SIX(6, 2_000_000_000);
 
     private fun hasCorrectNum(correctNum: Int): Boolean {
         return this.correctNum == correctNum

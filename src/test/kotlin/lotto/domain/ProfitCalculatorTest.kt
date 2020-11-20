@@ -1,28 +1,23 @@
 package lotto.domain
 
+import lotto.domain.data.Money
+import lotto.domain.data.WinLotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import java.util.EnumMap
 
 internal class ProfitCalculatorTest {
     @Test
     fun getProfitRatioTest() {
         // given
-        val inputPrice = 10000
-        val outputPrice = 55000.00
+        val purchaseCost = Money(10000)
+        val winLottos = EnumMap<WinLotto, Int>(WinLotto::class.java)
 
-        // then
-        assertThat(ProfitCalculator().getProfitRatio(inputPrice, outputPrice)).isEqualTo(5.50)
-    }
-
-    @Test
-    fun getTotalProfitTest() {
-        // given
-        val winLottos =
-            listOf(WinLotto.CORRECT_THREE, WinLotto.CORRECT_FOUR, WinLotto.CORRECT_FIVE, WinLotto.CORRECT_SIX)
         // when
-        winLottos[0].setWinnerCount(1)
-        winLottos[1].setWinnerCount(1)
+        winLottos[WinLotto.CORRECT_THREE] = 1
+        winLottos[WinLotto.CORRECT_FOUR] = 1
+
         // then
-        assertThat(ProfitCalculator().getTotalProfit(winLottos)).isEqualTo(55000.0)
+        assertThat(ProfitCalculator().getProfitRatio(purchaseCost, winLottos)).isEqualTo(5.50)
     }
 }

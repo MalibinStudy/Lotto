@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.domain.data
 
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
@@ -25,16 +25,6 @@ internal class WinLottoTest {
         assertThatThrownBy { WinLotto.findByCorrectNum(correctNum) }
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage("당첨 이력이 없습니다.\n요청한 값: $correctNum")
-    }
-
-    @DisplayName("winnerCount getter setter 테스트")
-    @ParameterizedTest
-    @ValueSource(strings = ["CORRECT_THREE", "CORRECT_FOUR", "CORRECT_FIVE", "CORRECT_SIX"])
-    fun winnerCountTest(winLotto: WinLotto) {
-        // when
-        winLotto.setWinnerCount(1)
-        // then
-        assertThat(winLotto.getWinnerCount()).isEqualTo(1)
     }
 
     @DisplayName("WinLotto별로 correctNum 잘 가져오는지 테스트")

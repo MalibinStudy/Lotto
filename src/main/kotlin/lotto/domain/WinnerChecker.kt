@@ -1,24 +1,23 @@
 package lotto.domain
 
+import lotto.domain.data.Lotto
+import lotto.domain.data.Lottos
+import lotto.domain.data.WinLotto
+import java.util.EnumMap
+
 class WinnerChecker {
-    fun getWinLottos(purchasedLottos: List<Lotto>, winningLotto: Lotto): List<WinLotto> {
-        val eachCorrectNums = purchasedLottos.map { it.getCorrectCountToOther(winningLotto) }
-        return filterWinLottos(eachCorrectNums)
+    fun getWinLottos(purchasedLottos: Lottos, winningLotto: Lotto): EnumMap<WinLotto, Int> {
+        val winLottos = purchasedLottos.getLottos()
+            .mapNotNull { it.getWinnerByCompare(winningLotto) }
+        return getWinLottoResult(winLottos)
     }
 
-    private fun filterWinLottos(eachCorrectNums: List<Int>): List<WinLotto> {
-        val winLottos = mutableListOf<WinLotto>()
-        for (correctNum in CORRECT_THREE..CORRECT_SIX) {
-            val winnerNum = eachCorrectNums.count { it == correctNum }
-            val winLotto = WinLotto.findByCorrectNum(correctNum)
-            winLotto.setWinnerCount(winnerNum)
-            winLottos.add(winLotto)
-        }
-        return winLottos
-    }
-
-    companion object {
-        const val CORRECT_THREE = 3
-        const val CORRECT_SIX = 6
+    private fun getWinLottoResult(winLottos: List<WinLotto>): EnumMap<WinLotto, Int> {
+        val winLottoResult = EnumMap<WinLotto, Int>(WinLotto::class.java)
+        winLottoResult[WinLotto.CORRECT_THREE] = winLottos.count { it.getCorrectNum() == 3 }
+        winLottoResult[WinLotto.CORRECT_FOUR] = winLottos.count { it.getCorrectNum() == 4 }
+        winLottoResult[WinLotto.CORRECT_FIVE] = winLottos.count { it.getCorrectNum() == 5 }
+        winLottoResult[WinLotto.CORRECT_SIX] = winLottos.count { it.getCorrectNum() == 6 }
+        return winLottoResult
     }
 }
