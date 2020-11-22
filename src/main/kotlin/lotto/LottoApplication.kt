@@ -13,7 +13,7 @@ import lotto.view.OutputView.printProfitRate
 fun main() {
     val money = receiveMoney()
     val lottoCount = LottoCashier.calculateLottoCount(money)
-    val lottos = LottoCashier.buyLotto(lottoCount)
+    val lottos = LottoCashier.getLotto(lottoCount)
     printLottoCount(lottoCount)
     printLottos(lottos)
 
