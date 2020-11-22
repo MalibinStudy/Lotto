@@ -14,14 +14,7 @@ object LottoCashier {
         }
     }
 
-    fun buyLotto(lottoCount: Int): List<Lotto> {
-        val lottos = mutableListOf<Lotto>()
-        repeat(lottoCount) { requestLottoMaker(lottos) }
-        return lottos
-    }
-
-    private fun requestLottoMaker(resultLottos: MutableList<Lotto>) {
-        val lotto = LottoMaker.make()
-        resultLottos.add(lotto)
+    fun getLotto(lottoCount: Int): List<Lotto> {
+        return (1..lottoCount).map { LottoMaker.make() }
     }
 }

@@ -1,6 +1,6 @@
 package lotto.domain
 
-import lotto.domain.LottoCashier.buyLotto
+import lotto.domain.LottoCashier.getLotto
 import lotto.domain.LottoCashier.calculateLottoCount
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
@@ -19,7 +19,7 @@ class LottoCashierTest {
     @CsvSource("1", "7")
     fun `로또를 로또머신으로부터 뽑은 것이 알맞은 개수로 출력되었는지 확인하기`(lottoCount: Int) {
         // when
-        val lottos = buyLotto(lottoCount)
+        val lottos = getLotto(lottoCount)
 
         // then
         assertThat(lottos.size).isEqualTo(lottoCount)
