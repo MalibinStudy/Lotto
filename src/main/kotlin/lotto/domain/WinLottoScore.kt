@@ -25,8 +25,6 @@ class WinLottoScore(
     }
 
     private fun getTotalPrize(): Int {
-        val totalPrize =
-            WinLotto.THREE.prizeMoney * score[WinLotto.THREE]!! + WinLotto.FOUR.prizeMoney * score[WinLotto.FOUR]!! + WinLotto.FIVE.prizeMoney * score[WinLotto.FIVE]!! + WinLotto.SIX.prizeMoney * score[WinLotto.SIX]!!
-        return totalPrize
+        return score.entries.sumBy { it.key.prizeMoney * it.value }
     }
 }
