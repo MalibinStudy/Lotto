@@ -17,10 +17,6 @@ object LottoScoringMachine {
     }
 
     private fun getSameNumberCount(winLotto: Lotto, lotto: Lotto): Int {
-        var count = 0
-        lotto.numbers.map {
-            if (winLotto.checkHas(it)) count += 1
-        }
-        return count
+        return lotto.numbers.count { winLotto.checkHas(it) }
     }
 }
