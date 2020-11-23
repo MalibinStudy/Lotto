@@ -5,13 +5,16 @@ import org.junit.jupiter.api.Test
 
 internal class LottosTest {
     @Test
-    fun getLottosTest() {
+    fun resultOfWinTest() {
         // given
-        val lottoNums = setOf(LottoNum(1), LottoNum(2), LottoNum(3), LottoNum(4), LottoNum(5), LottoNum(6))
+        val purchaseLottoNums = setOf(LottoNum(1), LottoNum(2), LottoNum(3), LottoNum(4), LottoNum(5), LottoNum(6))
+        val winningLottoNums = setOf(LottoNum(1), LottoNum(2), LottoNum(3), LottoNum(4), LottoNum(5), LottoNum(6))
+
         // when
-        val lottos = Lottos(listOf(Lotto(lottoNums)))
+        val purchasedLottos = Lottos(List(1) { Lotto(purchaseLottoNums) })
+        val winningLotto = Lotto(winningLottoNums)
 
         // then
-        assertThat(lottos.getLottos().size).isEqualTo(1)
+        assertThat(purchasedLottos.resultOfWin(winningLotto).result[LottoResult.CORRECT_SIX]).isEqualTo(1)
     }
 }

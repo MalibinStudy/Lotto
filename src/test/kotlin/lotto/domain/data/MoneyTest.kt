@@ -6,17 +6,12 @@ import org.junit.jupiter.api.Test
 import java.lang.IllegalArgumentException
 
 internal class MoneyTest {
+    @DisplayName("1000 이상 숫자가 아니라면 IllegalArgument 던지는지 테스트")
     @Test
-    fun getValueTest() {
-        Assertions.assertThat(Money(1000).getValue()).isEqualTo(1000)
-    }
-
-    @DisplayName("1부터 45가 아니면 IllegalArgument 던지는지 테스트")
-    @Test
-    fun lottoNumTest() {
+    fun lottoPriceTest() {
         // then
-        Assertions.assertThatThrownBy { Money(-5000) }
+        Assertions.assertThatThrownBy { Money(900) }
             .isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessage("돈이 이상해요 입력값: -5000")
+            .hasMessage("구매 가격은 1000원 이상 입력되어야 합니다.\n입력값: 900")
     }
 }

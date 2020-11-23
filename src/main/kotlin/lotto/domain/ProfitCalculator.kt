@@ -1,18 +1,17 @@
 package lotto.domain
 
 import lotto.domain.data.Money
-import lotto.domain.data.WinLotto
-import java.util.EnumMap
+import lotto.domain.data.WinResults
 
 class ProfitCalculator {
-    fun getProfitRatio(purchaseCost: Money, winLottos: EnumMap<WinLotto, Int>): Double {
-        val totalProfit = getTotalProfit(winLottos)
-        return kotlin.math.round(totalProfit / purchaseCost.getValue() * ONE_HUNDRED) / ONE_HUNDRED
+    fun getProfitRatio(purchaseCost: Money, lottosResult: WinResults): Double {
+        val totalProfit = getTotalProfit(lottosResult)
+        return kotlin.math.round(totalProfit / purchaseCost.value * ONE_HUNDRED) / ONE_HUNDRED
     }
 
-    private fun getTotalProfit(winLottos: EnumMap<WinLotto, Int>): Double {
+    private fun getTotalProfit(lottosResult: WinResults): Double {
         var totalProfit = 0.00
-        winLottos.forEach { (winLOtto, winnerCount) ->
+        lottosResult.result.forEach { (winLOtto, winnerCount) ->
             totalProfit += (winLOtto.winPrice * winnerCount)
         }
         return totalProfit

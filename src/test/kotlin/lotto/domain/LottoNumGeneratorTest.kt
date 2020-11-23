@@ -5,15 +5,12 @@ import org.junit.jupiter.api.Test
 
 internal class LottoNumGeneratorTest {
     @Test
-    fun generateRandomNumsTest() {
+    fun generateLottoNumsTest() {
         // given
         val lottoNumGenerator = LottoNumGenerator()
         // when
-        val randomNums = lottoNumGenerator.generateRandomNums()
+        val randomNums = lottoNumGenerator.generateLottoNums()
         // then
-        randomNums.forEach {
-            assertThat(it.getLottoNum()).isLessThan(46)
-            assertThat(it.getLottoNum()).isGreaterThan(0)
-        }
+        assertThat(randomNums.size).isEqualTo(6)
     }
 }

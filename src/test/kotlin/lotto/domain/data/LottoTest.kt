@@ -29,18 +29,6 @@ internal class LottoTest {
         val otherLotto = Lotto(otherLottoNum)
 
         // then
-        assertThat(purchasedLotto.getWinnerByCompare(otherLotto)?.getCorrectNum()).isEqualTo(3)
-    }
-
-    @Test
-    fun toStringTest() {
-        // given
-        val lottoNum = setOf(LottoNum(1), LottoNum(2), LottoNum(3), LottoNum(4), LottoNum(5), LottoNum(6))
-
-        // when
-        val lotto = Lotto(lottoNum)
-
-        // then
-        assertThat(lotto.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]")
+        assertThat(purchasedLotto.getWinnerByCompare(otherLotto).correctNum).isEqualTo(3)
     }
 }

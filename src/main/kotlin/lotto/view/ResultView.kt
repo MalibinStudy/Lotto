@@ -1,21 +1,20 @@
 package lotto.view
 
 import lotto.domain.data.Lottos
-import lotto.domain.data.WinLotto
-import java.util.EnumMap
+import lotto.domain.data.WinResults
 
 class ResultView {
     fun showLottos(purchasedLottos: Lottos) {
-        val lottos = purchasedLottos.getLottos()
+        val lottos = purchasedLottos.lottos
         println("${lottos.size}개를 구매했습니다.")
         lottos.forEach { println(it.toString()) }
         print("\n")
     }
 
-    fun showWinStatistics(winLotto: EnumMap<WinLotto, Int>) {
+    fun showWinStatistics(winResult: WinResults) {
         println("\n당첨 통계\n--------")
-        winLotto.forEach { (winLotto, winnerCount) ->
-            val correctNum = winLotto.getCorrectNum()
+        winResult.result.forEach { (winLotto, winnerCount) ->
+            val correctNum = winLotto.correctNum
             val winPrice = winLotto.winPrice
             println("${correctNum}개 일치 (${winPrice}원)- ${winnerCount}개")
         }

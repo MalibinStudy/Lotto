@@ -1,21 +1,17 @@
 package lotto.domain
 
 import lotto.domain.data.Lotto
-import lotto.domain.data.Lotto.Companion.LOTTO_ENTRY_NUM
-import lotto.domain.data.Lottos
+import lotto.domain.data.LottoNum
 import lotto.domain.data.Money
+import lotto.domain.data.Lottos
 
-class LottoMachine(private val lottoNumGenerator: LottoNumGenerator) {
-    fun generatedLottos(purchaseCost: Money): Lottos {
-        val numOfLottos = purchaseCost.getValue() / LOTTO_PRICE_UNIT
-        return Lottos(List(numOfLottos) { generateLotto() })
+class LottoMachine {
+    fun generateLottos(purchaseCost: Money, lottoNumGenerator: LottoNumGenerator): Lottos {
+        val numOfLottos = purchaseCost.value / LOTTO_PRICE_UNIT
+        return Lottos((1..numOfLottos).map { generateLotto(lottoNumGenerator.generateLottoNums()) })
     }
 
-    private fun generateLotto(): Lotto {
-        val shuffledLottoNums = lottoNumGenerator.generateRandomNums()
-        val lottoNums = shuffledLottoNums.take(LOTTO_ENTRY_NUM)
-            .sortedBy { it.getLottoNum() }
-            .toSet()
+    fun generateLotto(lottoNums: Set<LottoNum>): Lotto {
         return Lotto(lottoNums)
     }
 

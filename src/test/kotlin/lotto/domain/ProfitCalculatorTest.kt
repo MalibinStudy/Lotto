@@ -1,7 +1,8 @@
 package lotto.domain
 
 import lotto.domain.data.Money
-import lotto.domain.data.WinLotto
+import lotto.domain.data.LottoResult
+import lotto.domain.data.WinResults
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.util.EnumMap
@@ -11,13 +12,15 @@ internal class ProfitCalculatorTest {
     fun getProfitRatioTest() {
         // given
         val purchaseCost = Money(10000)
-        val winLottos = EnumMap<WinLotto, Int>(WinLotto::class.java)
+        val winLottos = EnumMap<LottoResult, Int>(LottoResult::class.java)
 
         // when
-        winLottos[WinLotto.CORRECT_THREE] = 1
-        winLottos[WinLotto.CORRECT_FOUR] = 1
+        winLottos[LottoResult.CORRECT_THREE] = 1
+        winLottos[LottoResult.CORRECT_FOUR] = 1
+
+        val winLottoResults = WinResults(winLottos)
 
         // then
-        assertThat(ProfitCalculator().getProfitRatio(purchaseCost, winLottos)).isEqualTo(5.50)
+        assertThat(ProfitCalculator().getProfitRatio(purchaseCost, winLottoResults)).isEqualTo(5.50)
     }
 }
