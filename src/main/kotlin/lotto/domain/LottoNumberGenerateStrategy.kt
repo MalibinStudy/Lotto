@@ -1,5 +1,5 @@
 package lotto.domain
 
-fun interface DrowLottoNumber {
+fun interface LottoNumberGenerateStrategy {
     fun createLottoTicket(): LottoTicket
 }
