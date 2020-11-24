@@ -5,8 +5,8 @@ import lotto.domain.ProfitCalculator
 object OutputView {
     private var countOfMatch = 3
 
-    fun printCountOfLotto() {
-        println("\n${InputView.countOfLotto}개를 구매했습니다.")
+    fun printCountOfLotto(countOfLotto: Int?) {
+        println("\n${countOfLotto}개를 구매했습니다.")
     }
 
     fun printLottoNumberList(list: List<List<Int>>) {
@@ -15,9 +15,9 @@ object OutputView {
         }
     }
 
-    fun displayResult(lottoList: List<List<Int>>) {
-        val profitCalculator = ProfitCalculator()
-        val profitRate = profitCalculator.calculate(lottoList)
+    fun displayResult(lottoList: List<List<Int>>, amountOfLotto: Int?) {
+        val profitCalculator = ProfitCalculator(lottoList)
+        val profitRate = profitCalculator.calculate(InputView.winningNumberList, amountOfLotto)
 
         println("\n당첨 통계\n-------")
 

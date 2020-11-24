@@ -2,7 +2,7 @@ package lotto.view
 
 object InputView {
     var countOfLotto: Int? = -1
-    var amountOfLotto: Int? = 0
+    var amountOfLotto: Int? = -1
     var winningNumberList: List<Int>? = listOf()
     private const val DELIMITER = ","
     private const val PRICE_OF_LOTTO = 1_000

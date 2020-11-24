@@ -2,27 +2,28 @@ package lotto.domain
 
 import lotto.view.InputView
 
-class ProfitCalculator {
+class ProfitCalculator(private val lottoList: List<List<Int>>) {
     var mapOfResult = mapOf<Int, Int>()
 
-    fun calculate(lottoList: List<List<Int>>): Double? {
-        mapOfResult = rankResult(lottoList)
+    fun calculate(winningNumberList: List<Int>?, amountOfLotto: Int?): Double? {
+        mapOfResult = rankResult(winningNumberList!!)
         var totalPrize = 0.0
         mapOfResult.forEach {
             totalPrize += it.key * it.value
         }
-        return totalPrize / InputView.amountOfLotto!!
+        return totalPrize / amountOfLotto!!
     }
 
-    private fun rankResult(lottoList: List<List<Int>>): Map<Int, Int> {
-        val winnerChecker = WinnerChecker()
-        val mapOfLotteryResult = winnerChecker.checkLotteryResult(lottoList)
 
+    private fun rankResult(winningNumberList: List<Int>): Map<Int, Int> {
+        val winnerChecker = WinnerChecker()
+        val mapOfLotteryResult = winnerChecker.checkLotteryResult(lottoList, winningNumberList)
         val mapOfResult = mutableMapOf<Int, Int>()
-        mapOfResult.put(THREE_MATCHED, mapOfLotteryResult.filter { it == 3 }.size)
-        mapOfResult.put(FOUR_MATCHED, mapOfLotteryResult.filter { it == 4 }.size)
-        mapOfResult.put(FIVE_MATCHED, mapOfLotteryResult.filter { it == 5 }.size)
-        mapOfResult.put(SIX_MATCHED, mapOfLotteryResult.filter { it == 6 }.size)
+
+        mapOfResult[THREE_MATCHED] = mapOfLotteryResult.filter { it == 3 }.size
+        mapOfResult[FOUR_MATCHED] = mapOfLotteryResult.filter { it == 4 }.size
+        mapOfResult[FIVE_MATCHED] = mapOfLotteryResult.filter { it == 5 }.size
+        mapOfResult[SIX_MATCHED] = mapOfLotteryResult.filter { it == 6 }.size
 
         return mapOfResult
     }

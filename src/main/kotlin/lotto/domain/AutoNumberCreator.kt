@@ -1,12 +1,9 @@
 package lotto.domain
 
-import lotto.view.InputView
+class AutoNumberCreator() {
 
-class AutoNumberCreator {
-    fun createEveryLotto(): List<List<Int>> {
+    fun createEveryLotto(countOfLotto: Int): List<List<Int>> {
         var everyLottoList = mutableListOf<List<Int>>()
-        val countOfLotto = InputView.countOfLotto!!
-
         repeat(countOfLotto) {
             val lottoNumber = createAutoNumber()
             everyLottoList.add(lottoNumber)
