@@ -27,7 +27,8 @@ internal class LottoBundleTest {
         @JvmStatic
         fun providerLottoRange() = listOf(
             Arguments.of(
-                (20..25), LottoTicket(
+                (20..25),
+                LottoTicket(
                     listOf(
                         LottoNumber(1),
                         LottoNumber(2),

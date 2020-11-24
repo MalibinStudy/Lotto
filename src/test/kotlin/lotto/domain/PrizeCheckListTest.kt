@@ -4,7 +4,7 @@ import lotto.domain.LotteryWinningCriteria.Companion.FIRST_PRIZE
 import lotto.domain.LotteryWinningCriteria.Companion.FOURTH_PRIZE
 import lotto.domain.LotteryWinningCriteria.Companion.SECOND_PRIZE
 import lotto.domain.LotteryWinningCriteria.Companion.THIRD_PRIZE
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
