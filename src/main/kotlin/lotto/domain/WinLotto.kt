@@ -2,11 +2,11 @@ package lotto.domain
 
 import java.lang.IllegalArgumentException
 
-enum class WinLotto(private val sameNumberCount: Int, val prizeMoney: Int) {
-    THREE(3, 5000),
-    FOUR(4, 50000),
-    FIVE(5, 1500000),
-    SIX(6, 2000000000);
+enum class WinLotto(private val sameNumberCount: Int, val prizeMoney: Money) {
+    THREE(3, Money(5_000)),
+    FOUR(4, Money(50_000)),
+    FIVE(5, Money(1_500_000)),
+    SIX(6, Money(2_000_000_000));
 
     private fun checkIfSameCount(count: Int): Boolean = this.sameNumberCount == count
 
