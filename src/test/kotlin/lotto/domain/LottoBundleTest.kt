@@ -13,27 +13,31 @@ internal class LottoBundleTest {
             .installDrawingMachine(DrawingMachine(range))
             .sellsLottoTickets(4000)
 
-        assertThat(lottoBundle.check(lottoTicket).prizeCheckList == listOf(
-            LotteryWinningCriteria.LOSING_TICKET,
-            LotteryWinningCriteria.LOSING_TICKET,
-            LotteryWinningCriteria.LOSING_TICKET,
-            LotteryWinningCriteria.LOSING_TICKET,
-        ))
+        assertThat(
+            lottoBundle.check(lottoTicket).prizeCheckList == listOf(
+                LotteryWinningCriteria.LOSING_TICKET,
+                LotteryWinningCriteria.LOSING_TICKET,
+                LotteryWinningCriteria.LOSING_TICKET,
+                LotteryWinningCriteria.LOSING_TICKET,
+            )
+        )
     }
 
     companion object {
         @JvmStatic
         fun providerLottoRange() = listOf(
-            Arguments.of((20..25), LottoTicket(
-                listOf(
-                    LottoNumber(1),
-                    LottoNumber(2),
-                    LottoNumber(3),
-                    LottoNumber(4),
-                    LottoNumber(5),
-                    LottoNumber(6),
+            Arguments.of(
+                (20..25), LottoTicket(
+                    listOf(
+                        LottoNumber(1),
+                        LottoNumber(2),
+                        LottoNumber(3),
+                        LottoNumber(4),
+                        LottoNumber(5),
+                        LottoNumber(6),
+                    )
                 )
-            ))
+            )
         )
     }
 }

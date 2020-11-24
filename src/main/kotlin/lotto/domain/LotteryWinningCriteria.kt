@@ -22,6 +22,7 @@ enum class LotteryWinningCriteria(
         fun checkLottoPrize(winningNumber: Int): LotteryWinningCriteria {
             return values().find { it.isWin(winningNumber) } ?: LOSING_TICKET
         }
+
         const val NO_PRIZE = 0L
         const val FOURTH_PRIZE = 5_000L
         const val THIRD_PRIZE = 50_000L

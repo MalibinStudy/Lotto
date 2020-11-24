@@ -20,9 +20,11 @@ internal class DrawingMachineTest {
         val lottoShop = LottoShop()
             .installDrawingMachine(DrawingMachine(exampleRange))
 
-        assertTrue(lottoShop
-            .sellsLottoTickets(1000)
-            .lottoTickets[0]
-            .check(exampleLottoTicket) == 6 )
+        assertTrue(
+            lottoShop
+                .sellsLottoTickets(1000)
+                .lottoTickets[0]
+                .check(exampleLottoTicket) == 6
+        )
     }
 }

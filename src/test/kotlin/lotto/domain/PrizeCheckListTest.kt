@@ -47,24 +47,30 @@ internal class PrizeCheckListTest {
     companion object {
         @JvmStatic
         fun provideResultAndExpected() = listOf(
-            Arguments.of(listOf(
-                LotteryWinningCriteria.LOSING_TICKET,
-                LotteryWinningCriteria.FOURTH_PRIZE_TICKET,
-                LotteryWinningCriteria.THIRD_PRIZE_TICKET),
+            Arguments.of(
+                listOf(
+                    LotteryWinningCriteria.LOSING_TICKET,
+                    LotteryWinningCriteria.FOURTH_PRIZE_TICKET,
+                    LotteryWinningCriteria.THIRD_PRIZE_TICKET
+                ),
                 listOf(1, 1, 1, 0, 0)
             ),
-            Arguments.of(listOf(
-                LotteryWinningCriteria.THIRD_PRIZE_TICKET,
-                LotteryWinningCriteria.THIRD_PRIZE_TICKET,
-                LotteryWinningCriteria.SECOND_PRIZE_TICKET,
-                LotteryWinningCriteria.FIRST_PRIZE_TICKET),
+            Arguments.of(
+                listOf(
+                    LotteryWinningCriteria.THIRD_PRIZE_TICKET,
+                    LotteryWinningCriteria.THIRD_PRIZE_TICKET,
+                    LotteryWinningCriteria.SECOND_PRIZE_TICKET,
+                    LotteryWinningCriteria.FIRST_PRIZE_TICKET
+                ),
                 listOf(0, 0, 2, 1, 1)
             ),
-            Arguments.of(listOf(
-                LotteryWinningCriteria.FOURTH_PRIZE_TICKET,
-                LotteryWinningCriteria.LOSING_TICKET,
-                LotteryWinningCriteria.LOSING_TICKET,
-                LotteryWinningCriteria.SECOND_PRIZE_TICKET),
+            Arguments.of(
+                listOf(
+                    LotteryWinningCriteria.FOURTH_PRIZE_TICKET,
+                    LotteryWinningCriteria.LOSING_TICKET,
+                    LotteryWinningCriteria.LOSING_TICKET,
+                    LotteryWinningCriteria.SECOND_PRIZE_TICKET
+                ),
                 listOf(2, 1, 0, 1, 0)
             ),
         )
