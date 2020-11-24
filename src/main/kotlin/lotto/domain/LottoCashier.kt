@@ -1,20 +1,26 @@
 package lotto.domain
 
-object LottoCashier {
-    private const val LOTTO_PRICE = 1000
+import lotto.domai.RandomNumGenerator
 
-    fun calculateLottoCount(money: Int): Int {
+class LottoCashier(randomNumGenerator: RandomNumGenerator) {
+    private val lottoTicketMachine = LottoTicketMachine(randomNumGenerator)
+
+    fun calculateLottoCount(money: Money): Int {
         checkEnoughMoney(money)
-        return money / LOTTO_PRICE
+        return money.value / LOTTO_PRICE
     }
 
-    private fun checkEnoughMoney(money: Int) {
-        require(money >= LOTTO_PRICE) {
+    private fun checkEnoughMoney(money: Money) {
+        require(money.value >= LOTTO_PRICE) {
             "로또 하나의 금액은 1000원입니다."
         }
     }
 
-    fun getLotto(lottoCount: Int): List<Lotto> {
-        return (1..lottoCount).map { LottoMaker.make() }
+    fun getLotto(lottoCount: Int): List<LottoTicket> {
+        return (1..lottoCount).map { lottoTicketMachine.make() }
+    }
+
+    companion object {
+        private const val LOTTO_PRICE = 1000
     }
 }
