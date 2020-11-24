@@ -18,7 +18,7 @@ object OutputView {
     }
 
     fun printMyLotto(lottoBundle: LottoBundle) {
-        for(lottoTicket in lottoBundle.lottoTickets) {
+        for (lottoTicket in lottoBundle.lottoTickets) {
             println(lottoTicket)
         }
     }

@@ -7,7 +7,7 @@ class LottoTicket(private val lottoTicket: List<LottoNumber>) {
         require(lottoTicket.size == LOTTO_LENGTH) { "로또의 입력 길이는 ${LOTTO_LENGTH}가 되어야 합니다. 입력 로또 길이 ${lottoTicket.size}" }
     }
 
-    fun check(winningTicket: LottoTicket) : Int {
+    fun check(winningTicket: LottoTicket): Int {
         return lottoTicket.count {
             winningTicket.lottoTicket
                 .contains(it)

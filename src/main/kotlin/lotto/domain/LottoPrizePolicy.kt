@@ -1,5 +1,5 @@
 package lotto.domain
 
 fun interface LottoPrizePolicy {
-    fun setLottoPrize() : Long
+    fun setLottoPrize(): Long
 }

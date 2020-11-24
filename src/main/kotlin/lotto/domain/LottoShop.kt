@@ -4,7 +4,7 @@ class LottoShop {
     private val lottoTickets = mutableListOf<LottoTicket>()
     private lateinit var drawingMachine: DrawingMethod
 
-    fun installDrawingMachine(drawingMethod: DrawingMethod) : LottoShop {
+    fun installDrawingMachine(drawingMethod: DrawingMethod): LottoShop {
         this.drawingMachine = drawingMethod
         return this
     }
