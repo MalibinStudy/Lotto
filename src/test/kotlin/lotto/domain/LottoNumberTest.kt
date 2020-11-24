@@ -3,15 +3,18 @@ package lotto.domain
 import org.assertj.core.api.AssertionsForClassTypes.assertThat
 import org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
 internal class LottoNumberTest {
 
-    @Test
-    fun `로또 번호가 지정 범위에서만 생성 되는지 확인`() {
+    @ParameterizedTest
+    @ValueSource(ints = [0, 46])
+    fun `로또 번호가 지정 범위에서만 생성 되는지 확인`(notRangeLottoNum: Int) {
         // than
-        assertThatThrownBy { LottoNumber.valueOf(46) }
+        assertThatThrownBy { LottoNumber.valueOf(notRangeLottoNum) }
             .isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessage("로또 번호는 ${LottoNumber.LOTTO_START_NUMBER} ~ ${LottoNumber.LOTTO_END_NUMBER} 사이 값이여야합니다, 입력받은 값: 46")
+            .hasMessage("로또 번호는 ${LottoNumber.LOTTO_START_NUMBER} ~ ${LottoNumber.LOTTO_END_NUMBER} 사이 값이여야합니다, 입력받은 값: $notRangeLottoNum")
     }
 
     @Test

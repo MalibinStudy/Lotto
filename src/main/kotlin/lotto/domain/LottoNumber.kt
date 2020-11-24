@@ -25,11 +25,7 @@ class LottoNumber private constructor(
 
         private class LottoNumberCache {
             companion object {
-                var cache: List<LottoNumber> = listOf()
-
-                init {
-                    cache = (LOTTO_START_NUMBER..LOTTO_END_NUMBER).map { LottoNumber(it) }
-                }
+                val cache: List<LottoNumber> = (LOTTO_START_NUMBER..LOTTO_END_NUMBER).map { LottoNumber(it) }
             }
         }
     }
