@@ -1,45 +1,25 @@
 package lotto.view
 
-import lotto.domain.LotteryWallet
-import lotto.domain.WinningResult
+import lotto.domain.LottoBundle
+import lotto.domain.PrizeCheckList
 
 object OutputView {
-    fun printAllOfMyLotto(lotteryWallet: LotteryWallet) {
-        val myLottoList = lotteryWallet.getMyLotto()
-        println("${myLottoList.size}개를 구매하셨습니다.")
-        for (lottoNumber in myLottoList) {
-            println(lottoNumber.getLotto())
-        }
-        println(BLANK)
-    }
-
-    fun showMyResult(winningResult: WinningResult, lotteryWallet: LotteryWallet) {
-        val myWinningResult = winningResult.checkMyLotto(lotteryWallet)
-        val lottoPrize: List<Long> = listOf(FOURTH_PRIZE, THIRD_PRIZE, SECOND_PRIZE, FIRST_PRIZE)
-        val myPrizeResult = mutableListOf<Int>()
-
-        var myWinningPrize = 0L
-
+    fun printMyLottoResult(prizeCheckList: PrizeCheckList) {
+        val lottoResult = prizeCheckList.getWinningResult()
+        println("결과 통계")
         for (index in 3..6) {
-            myPrizeResult.add(myWinningResult.filter { it == index }.size)
+            println("${index}개 일치: ${lottoResult[index - 2]}")
         }
-
-        for (index in lottoPrize.indices) {
-            myWinningPrize += myPrizeResult[index] * lottoPrize[index]
-        }
-
-        println("당첨 통계")
-        println("================")
-        repeat(myPrizeResult.size) {
-            println("${it + 3}개 일치 (${lottoPrize[it]}원): ${myPrizeResult[it]}개")
-        }
-
-        println("총 수익률은 ${myWinningPrize.toDouble() / lotteryWallet.getMyMoney()}입니다.")
     }
 
-    private const val FIRST_PRIZE = 2000000000L
-    private const val SECOND_PRIZE = 1500000L
-    private const val THIRD_PRIZE = 50000L
-    private const val FOURTH_PRIZE = 5000L
-    private const val BLANK = ""
+    fun printMyGainRate(money: Int, prizeCheckList: PrizeCheckList) {
+        val myPrize = prizeCheckList.getMoney()
+        println("총 수익률은 ${String.format("%.2f", myPrize.sum() / money.toDouble())}입니다.")
+    }
+
+    fun printMyLotto(lottoBundle: LottoBundle) {
+        for(lottoTicket in lottoBundle.lottoTickets) {
+            println(lottoTicket)
+        }
+    }
 }

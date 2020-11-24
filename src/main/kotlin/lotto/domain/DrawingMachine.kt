@@ -1,22 +1,18 @@
 package lotto.domain
 
-class DrawingMachine(start: Int, end: Int) {
-    private val lottoSampleSpace: List<Int> = (start..end).toList()
+import lotto.domain.LottoTicket.Companion.LOTTO_LENGTH
+
+class DrawingMachine(range: IntRange) : DrawingMethod {
+    private val lottoBalls = mutableListOf<LottoNumber>()
 
     init {
-        Validation.validateRangeInputs(start, end)
+        range.forEach { lottoBalls.add(LottoNumber(it)) }
     }
 
-    fun getLottoList(length: Int): LottoNumber = LottoNumber(
-        lottoSampleSpace
+    override fun getLottoTicket(): LottoTicket = LottoTicket(
+        lottoBalls
             .shuffled()
-            .take(length)
-            .sorted()
+            .take(LOTTO_LENGTH)
+            .sortedBy { it.lottoNumber }
     )
-
-    companion object {
-        const val LOTTO_LENGTH = 6
-        const val LOTTO_NUMBER_START = 1
-        const val LOTTO_NUMBER_END = 45
-    }
 }
