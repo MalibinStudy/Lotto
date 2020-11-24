@@ -1,7 +1,7 @@
 package lotto.view
 
-import lotto.domain.Lotto
-import lotto.domain.WinLottoScore
+import lotto.domain.LottoTicket
+import lotto.domain.WinLottoStatistics
 import lotto.domain.WinLotto
 
 object OutputView {
@@ -9,18 +9,18 @@ object OutputView {
         println("$lottoCount 개를 구매했습니다.")
     }
 
-    fun printLottos(lottos: List<Lotto>) {
-        lottos.map { println(it.numbers) }
+    fun printLottos(lottoTickets: List<LottoTicket>) {
+        lottoTickets.map { println(it.toString()) }
         println()
     }
 
-    fun printLottoScore(winLottoScore: WinLottoScore) {
+    fun printLottoScore(winLottoStatistics: WinLottoStatistics) {
         println("\n당첨 통계")
         println("---------")
-        println("3개 일치 (5000원)- ${winLottoScore.getLottoCount(WinLotto.THREE)}")
-        println("4개 일치 (50000원)- ${winLottoScore.getLottoCount(WinLotto.FOUR)}")
-        println("5개 일치 (1500000원)- ${winLottoScore.getLottoCount(WinLotto.FIVE)}")
-        println("6개 일치 (2000000000원)- ${winLottoScore.getLottoCount(WinLotto.FOUR)}")
+        println("3개 일치 (5000원)- ${winLottoStatistics.getLottoCount(WinLotto.THREE)}")
+        println("4개 일치 (50000원)- ${winLottoStatistics.getLottoCount(WinLotto.FOUR)}")
+        println("5개 일치 (1500000원)- ${winLottoStatistics.getLottoCount(WinLotto.FIVE)}")
+        println("6개 일치 (2000000000원)- ${winLottoStatistics.getLottoCount(WinLotto.FOUR)}")
     }
 
     fun printProfitRate(profitRate: Double) {
