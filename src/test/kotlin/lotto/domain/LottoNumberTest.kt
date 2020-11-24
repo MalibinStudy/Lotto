@@ -11,7 +11,7 @@ internal class LottoNumberTest {
         // than
         assertThatThrownBy { LottoNumber.valueOf(46) }
             .isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessage("로또 번호는 ${LottoNumber.LOTTO_START_NUMBER}~${LottoNumber.LOTTO_END_NUMBER} 사이 값이여야합니다, 입력받은 값: 46")
+            .hasMessage("로또 번호는 ${LottoNumber.LOTTO_START_NUMBER} ~ ${LottoNumber.LOTTO_END_NUMBER} 사이 값이여야합니다, 입력받은 값: 46")
     }
 
     @Test
