@@ -35,7 +35,7 @@ tasks {
     }
     test {
         extensions.configure(JacocoTaskExtension::class) {
-            destinationFile = file("$buildDir/jacoco/jacoco.exec")
+            file("$buildDir/jacoco/jacoco.exec").also { it.also { destinationFile = it } }
         }
 
         finalizedBy("jacocoTestReport")
