@@ -3,7 +3,7 @@ package lotto.domain
 object LottoScoringMachine {
     private const val LEAST_WIN_NUMBER = 3
 
-    fun scoreLottos(winLottoTicket: LottoTicket, lottoTickets: List<LottoTicket>): WinLottoStatistics {
+    fun scoreLottoTickets(winLottoTicket: LottoTicket, lottoTickets: List<LottoTicket>): WinLottoStatistics {
         val lottoWinScore = WinLottoStatistics()
 
         lottoTickets.asSequence()
