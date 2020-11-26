@@ -20,7 +20,7 @@ fun main() {
     printLottos(lottoTickets)
 
     val winLotto = LottoTicket(receiveWinLottoNumbers())
-    val winLottoStatistics = LottoScoringMachine.scoreLottos(winLotto, lottoTickets)
+    val winLottoStatistics = LottoScoringMachine.scoreLottoTickets(winLotto, lottoTickets)
     printLottoScore(winLottoStatistics)
 
     val profitRate = winLottoStatistics.getProfitRate(money)
