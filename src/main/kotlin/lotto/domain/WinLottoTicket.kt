@@ -2,7 +2,7 @@ package lotto.domain
 
 import java.lang.IllegalArgumentException
 
-enum class WinLotto(private val sameNumberCount: Int, val prizeMoney: Money) {
+enum class WinLottoTicket(private val sameNumberCount: Int, val prizeMoney: Money) {
     THREE(3, Money(5_000)),
     FOUR(4, Money(50_000)),
     FIVE(5, Money(1_500_000)),
@@ -11,7 +11,7 @@ enum class WinLotto(private val sameNumberCount: Int, val prizeMoney: Money) {
     private fun checkIfSameCount(count: Int): Boolean = this.sameNumberCount == count
 
     companion object {
-        fun findInstance(winNumberCount: Int): WinLotto {
+        fun findInstance(winNumberCount: Int): WinLottoTicket {
             return values().find {
                 it.checkIfSameCount(winNumberCount)
             } ?: throw IllegalArgumentException("winNumberCount는 3, 4, 5, 6 중 하나여야 합니다.")

@@ -9,7 +9,7 @@ object LottoScoringMachine {
         lottoTickets.asSequence()
             .map { it.countSameNumber(winLottoTicket) }
             .filter { it >= LEAST_WIN_NUMBER }
-            .map { WinLotto.findInstance(it) }
+            .map { WinLottoTicket.findInstance(it) }
             .map { lottoWinScore.increaseLottoCount(it) }
             .toList()
         return lottoWinScore
