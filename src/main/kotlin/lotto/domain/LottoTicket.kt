@@ -13,7 +13,7 @@ data class LottoTicket(val numbers: List<LottoNum>) {
     fun countSameNumber(lottoTicket: LottoTicket): Int {
         val thisLottoTicketNumbers = this.numbers.map { it.num }
         val lottoTicketNumbers = lottoTicket.numbers.map { it.num }
-        return thisLottoTicketNumbers.count { lottoTicketNumbers.contains(it) }
+        return lottoTicketNumbers.count { thisLottoTicketNumbers.contains(it) }
     }
 
     override fun toString(): String {
