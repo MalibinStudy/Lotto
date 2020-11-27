@@ -9,6 +9,6 @@ fun main() {
     val purchaseMoney = InputView.getPurchaseMoney()
     val ticketCount = purchaseMoney / 1000
     OutputView.printPurchaseTicketCount(ticketCount)
-    val lottoTickets = LottoMachine.issueLottoTickets(purchaseMoney,LottoTicketRandomGenerator)
+    val lottoTickets = LottoMachine.issueLottoTickets(purchaseMoney, LottoTicketRandomGenerator)
     OutputView.printLottoTickets(lottoTickets)
 }
