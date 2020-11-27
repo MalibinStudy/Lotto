@@ -2,10 +2,11 @@ package lotto.view
 
 import lotto.domain.LottoTicket
 import lotto.domain.LottoTickets
+import lotto.domain.ProfitCalculator
+import lotto.domain.WinningResult
+import java.math.BigDecimal
 
 object OutputView {
-    private const val LOSS = "손해"
-    private const val GAIN = "이득"
     private const val DELIMITER = ","
 
     fun printPurchaseTicketCount(TicketCount: Int) {
@@ -17,29 +18,25 @@ object OutputView {
     }
 
     private fun printLottoTicket(lottoTicket: LottoTicket) {
-        println("[${lottoTicket.lottoTicket.joinToString(separator = DELIMITER)}]")
+        println("[${lottoTicket.lottoNumbers.joinToString(separator = DELIMITER)}]")
     }
 
-    fun printWinningStatics(statics: WinningStatics) {
+    fun printWinningStatistics(winningResults: List<WinningResult>,purchaseMoney:Int ) {
         println("당첨통계\n---------")
-        printWinningResult(statics.winningResult)
-        printRateOfProfit(statics.rateOfProfit)
-        printOutcome(statics.isLoss)
+        printWinningResult(winningResults)
+        printRateOfProfit(ProfitCalculator.getProfit(winningResults,purchaseMoney))
     }
 
-    private fun printWinningResult(winningResult: List<Int>) {
-        println("3개 일치 (5000원)- ${winningResult.count { it == 3 }}개")
-        println("4개 일치 (50000원)- ${winningResult.count { it == 4 }}개")
-        println("5개 일치 (1500000원)- ${winningResult.count { it == 5 }}개")
-        println("6개 일치 (2000000000원)- ${winningResult.count { it == 6 }}개")
+    private fun printWinningResult(winningResult: List<WinningResult>) {
+        println("3개 일치 (5000원)- ${winningResult.count { it == WinningResult.EQUAL_THREE }}개")
+        println("4개 일치 (50000원)- ${winningResult.count { it == WinningResult.EQUAL_FOUR }}개")
+        println("5개 일치 (1500000원)- ${winningResult.count { it == WinningResult.EQUAL_FIVE }}개")
+        println("6개 일치 (2000000000원)- ${winningResult.count { it == WinningResult.EQUAL_SIX }}개")
     }
 
-    private fun printRateOfProfit(rateOfProfit: Float) {
+    private fun printRateOfProfit(rateOfProfit: BigDecimal) {
         print("총 수익률은 ${rateOfProfit}입니다. ")
-    }
-
-    private fun printOutcome(isLoss: Boolean) {
-        val outcome = if (isLoss) LOSS else GAIN
+        val outcome = if (rateOfProfit < BigDecimal(1.00)) "손해" else "이익"
         println("기준이 1이기 때문에 결과적으로 ${outcome}라는 의미임")
     }
 }

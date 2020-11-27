@@ -1,7 +1,7 @@
 package lotto.domain
 
 class LottoTickets(val lottoTickets: List<LottoTicket>) {
-    private fun getWinningResults(winningNumbers: List<LottoNumber>): List<WinningResult> {
+    fun getWinningResults(winningNumbers: List<LottoNumber>): List<WinningResult> {
         return lottoTickets.map { it.getWinningResult(winningNumbers) }
     }
 
