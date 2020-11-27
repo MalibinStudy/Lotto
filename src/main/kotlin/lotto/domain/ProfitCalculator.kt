@@ -11,6 +11,6 @@ object ProfitCalculator {
     fun getProfit(winningResults: List<WinningResult>, purchaseMoney: Int): BigDecimal {
         val prizeSum = BigDecimal(getPrizeSum(winningResults))
         val purchaseMoney = BigDecimal(purchaseMoney)
-        return prizeSum.divide(purchaseMoney, 2, RoundingMode.FLOOR);
+        return prizeSum.divide(purchaseMoney, 2, RoundingMode.FLOOR)
     }
 }

@@ -21,10 +21,10 @@ object OutputView {
         println("[${lottoTicket.lottoNumbers.joinToString(separator = DELIMITER)}]")
     }
 
-    fun printWinningStatistics(winningResults: List<WinningResult>,purchaseMoney:Int ) {
+    fun printWinningStatistics(winningResults: List<WinningResult>, purchaseMoney: Int) {
         println("당첨통계\n---------")
         printWinningResult(winningResults)
-        printRateOfProfit(ProfitCalculator.getProfit(winningResults,purchaseMoney))
+        printRateOfProfit(ProfitCalculator.getProfit(winningResults, purchaseMoney))
     }
 
     private fun printWinningResult(winningResult: List<WinningResult>) {
