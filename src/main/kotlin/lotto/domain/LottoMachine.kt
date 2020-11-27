@@ -3,12 +3,12 @@ package lotto.domain
 object LottoMachine {
     private const val LOTTO_PRICE = 1000
 
-    fun issueLottoTickets(money: Int): LottoTickets {
-        val lottoTicketCount = getAmountOfLottoTickets(money)
-        return LottoTickets.create(lottoTicketCount)
+    fun issueLottoTickets(money: Int, lottoTicketGenerator: LottoTicketGenerator): LottoTickets {
+        val lottoTicketCount = getLottoTicketCount(money)
+        return LottoTickets.create(lottoTicketCount, lottoTicketGenerator)
     }
 
-    fun getAmountOfLottoTickets(money: Int): Int {
+    private fun getLottoTicketCount(money: Int): Int {
         return money / LOTTO_PRICE
     }
 }

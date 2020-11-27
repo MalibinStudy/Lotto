@@ -2,7 +2,6 @@ package lotto.view
 
 import lotto.domain.LottoTicket
 import lotto.domain.LottoTickets
-import lotto.domain.WinningStatics
 
 object OutputView {
     private const val LOSS = "손해"
