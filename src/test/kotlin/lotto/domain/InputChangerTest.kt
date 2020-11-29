@@ -1,6 +1,7 @@
 package lotto.domain
 
 import lotto.domain.data.Lotto
+import lotto.domain.data.LottoNum
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
@@ -19,6 +20,7 @@ internal class InputChangerTest {
             .hasMessage("숫자가 입력되어야 합니다. 입력값: $notNumString")
     }
 
+    @DisplayName("Lotto 객체 생성 테스트")
     @Test
     fun toLottoTest() {
         // given
@@ -27,15 +29,21 @@ internal class InputChangerTest {
         assertThat(InputChanger().toLotto(numString)).isInstanceOf(Lotto::class.java)
     }
 
-    @DisplayName("양식에 맞게 6개 입력하지 않은 경우")
+    @DisplayName("Bonus번호를 LottoNum으로 반환 테스트")
     @Test
-    fun checkWinnerNumsTest() {
+    fun toBonusLottoNumTest() {
         // given
-        val winnerNumsString = "1, 2, 3, 4, 5"
-        val winnerNumSplit = winnerNumsString.split(InputChanger.DELIMITER)
+        val winningLotto = Lotto(setOf(lottoNum(1), lottoNum(2), lottoNum(3), lottoNum(4), lottoNum(5), lottoNum(6)))
+        // when
+        val bonusNumString = "7"
+
         // then
-        Assertions.assertThatThrownBy { InputChanger().toLotto(winnerNumsString) }
-            .isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessage("당첨 번호를 잘못 입력하셨습니다. \n입력값: $winnerNumSplit \n개수와 띄어쓰기에 유의하여 다음과 같이 입력해주세요 : 1, 2, 5, 7, 14, 23")
+        assertThat(InputChanger().toBonusLottoNum(bonusNumString, winningLotto)).isEqualTo(
+            LottoNum.valueOf(bonusNumString.toInt())
+        )
+    }
+
+    private fun lottoNum(num: Int): LottoNum {
+        return LottoNum.valueOf(num)
     }
 }

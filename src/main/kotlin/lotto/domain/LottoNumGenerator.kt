@@ -3,9 +3,11 @@ package lotto.domain
 import lotto.domain.data.LottoNum
 
 class LottoNumGenerator {
+    private val lottoNums = (LottoNum.MINIMUM_LOTTO_NUM..LottoNum.MAXIMUM_LOTTO_NUM).map { LottoNum.valueOf(it) }
+
     fun generateLottoNums(): Set<LottoNum> {
-        val lottoNums = LottoNum.cache.shuffled()
         return lottoNums
+            .shuffled()
             .take(VALID_SIZE)
             .sortedBy { it.value }
             .toSet()
