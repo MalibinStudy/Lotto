@@ -14,9 +14,10 @@ class LottoTicket(
         require(lottoNumbers.toSet().size == LOTTO_NUMBER_COUNT) { "로또 번호는 중복될 수 없습니다." }
     }
 
-    fun getMatchingCountAbout(otherLottoTicket: LottoTicket): Int {
-        return this.lottoNumbers
-            .count { otherLottoTicket.hasLottoNumber(it) }
+    fun getLottoResultWith(otherLottoTicket: LottoTicket, bonusNumber: LottoNumber): LottoResult {
+        val matchCount = this.lottoNumbers.count { otherLottoTicket.hasLottoNumber(it) }
+        val hasBonusNumber = hasLottoNumber(bonusNumber)
+        return LottoResult.findByMatchNumOf(matchCount, hasBonusNumber)
     }
 
     private fun hasLottoNumber(lottoNumber: LottoNumber): Boolean {

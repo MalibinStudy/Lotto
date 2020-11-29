@@ -4,6 +4,7 @@ import org.assertj.core.api.AssertionsForClassTypes.assertThat
 import org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
 
 internal class LottoNumberTest {
@@ -23,7 +24,18 @@ internal class LottoNumberTest {
         val lottonumber1 = LottoNumber.valueOf(1)
         val lottoNUmberOther1 = LottoNumber.valueOf(1)
         // than
-        assertThat(lottonumber1 === lottoNUmberOther1)
+        assertThat(lottonumber1 == lottoNUmberOther1)
             .isEqualTo(true)
+    }
+
+    @ParameterizedTest
+    @CsvSource("1,2,false", "1,1,true")
+    fun `두 로또 번호 비교 테스트`(num: Int, otherNum: Int, result: Boolean) {
+        // given
+        val lottoNumber = LottoNumber.valueOf(num)
+        val otherLottoNumber = LottoNumber.valueOf(otherNum)
+        // than
+        assertThat(lottoNumber == otherLottoNumber)
+            .isEqualTo(result)
     }
 }

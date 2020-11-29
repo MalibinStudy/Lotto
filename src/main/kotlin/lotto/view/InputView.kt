@@ -1,8 +1,5 @@
 package lotto.view
 
-import lotto.domain.LottoTicket
-import lotto.domain.LottoTicketGenerator
-
 class InputView {
     companion object {
 
@@ -10,10 +7,13 @@ class InputView {
             return readLine()!!.toLong()
         }
 
-        fun getWinningLottoTicket(): LottoTicket {
+        fun getWinningLottoTicket(): List<String> {
             return readLine()!!
                 .split(",")
-                .let { LottoTicketGenerator().makeLottoTicket(it) }
+        }
+
+        fun getBonusNumber(): Int {
+            return readLine()!!.toInt()
         }
     }
 }
