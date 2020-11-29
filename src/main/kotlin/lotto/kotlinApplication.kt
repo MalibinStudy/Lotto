@@ -19,7 +19,7 @@ fun main() {
     printInfomationOnLottoPurchased(lottoTickes)
 
     printLastWeekWinningNumbersReqeust()
-    val lastWeekWinningTicket = LottoTicketGenerator().makeLottoTicket(InputView.getWinningLottoTicket())
+    val lastWeekWinningTicket = LottoTicketGenerator.makeLottoTicket(InputView.getWinningLottoTicket())
     printBonusNumberRequest()
     val bonusNumber = LottoNumber.valueOf(InputView.getBonusNumber())
     val lottoStatistics = lottoTickes.getStatistics(lastWeekWinningTicket, bonusNumber)

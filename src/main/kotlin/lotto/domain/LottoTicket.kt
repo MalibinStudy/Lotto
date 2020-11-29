@@ -20,7 +20,7 @@ class LottoTicket(
         return LottoResult.findByMatchNumOf(matchCount, hasBonusNumber)
     }
 
-    fun hasLottoNumber(lottoNumber: LottoNumber): Boolean {
+    private fun hasLottoNumber(lottoNumber: LottoNumber): Boolean {
         return this.lottoNumbers
             .contains(lottoNumber)
     }

@@ -19,11 +19,27 @@ internal class PurchasedLottoTicketsTest {
         // given
         val lottoNumberGenerateStrategy =
             LottoNumberGenerateStrategy { LottoTicket((7..12).map { LottoNumber.valueOf(it) }) }
-        val expectedTicket = LottoTicketGenerator().makeLottoTicket("7,8,9,10,11,12".split(","))
+        val expectedTicket = LottoTicketGenerator.makeLottoTicket("7,8,9,10,11,12".split(","))
         // when
         val purchasedLottoTickets = LottoTicketDispenser(lottoNumberGenerateStrategy).getLottoTickets(1000L)
         // than
         assertThat(purchasedLottoTickets.toString())
             .isEqualTo(expectedTicket.toString())
+    }
+
+    @Test
+    fun `지난주 당첨번호와 보너스 번호로 당첨 통계를 잘 가져오는지 테스트`() {
+        // given
+        val lastWeekLottoTicket = LottoTicketGenerator.makeLottoTicket("1,2,3,4,5,6".split(","))
+        val lottoNumberGenerateStrategy =
+            LottoNumberGenerateStrategy { LottoTicket((1..6).map { LottoNumber.valueOf(it) }) }
+        val purchasedLottoTickets = LottoTicketDispenser(lottoNumberGenerateStrategy).getLottoTickets(4000L)
+        // when
+        val statistics = purchasedLottoTickets.getStatistics(lastWeekLottoTicket, LottoNumber.valueOf(7))
+        // than
+        assertThat(statistics.countWinningWith(LottoResult.FIRST))
+            .isEqualTo(4)
+        assertThat(statistics.getTotalPrize())
+            .isEqualTo(LottoResult.FIRST.prize * 4)
     }
 }

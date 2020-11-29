@@ -1,7 +1,7 @@
 package lotto.domain
 
 class LottoStatistics(
-    val values: Map<LottoResult, Int>
+    private val values: Map<LottoResult, Int>
 ) {
     fun countWinningWith(lottoResult: LottoResult): Int = values[lottoResult] ?: 0
 
