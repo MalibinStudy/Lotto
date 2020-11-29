@@ -1,13 +1,7 @@
 package lotto.domain
 
-class LottoShop {
+class LottoShop(private val drawingMachine: DrawingMethod) {
     private val lottoTickets = mutableListOf<LottoTicket>()
-    private lateinit var drawingMachine: DrawingMethod
-
-    fun installDrawingMachine(drawingMethod: DrawingMethod): LottoShop {
-        this.drawingMachine = drawingMethod
-        return this
-    }
 
     fun sellsLottoTickets(price: Int): LottoBundle {
         repeat(price / LOTTO_UNIT_PRICE) { lottoTickets.add(drawingMachine.getLottoTicket()) }
