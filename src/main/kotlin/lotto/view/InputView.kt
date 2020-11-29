@@ -1,7 +1,6 @@
 package lotto.view
 
-import lotto.domain.LottoNum
-import lotto.domain.LottoNumCache
+import lotto.domain.LottoNumber
 import lotto.domain.Money
 
 object InputView {
@@ -10,13 +9,13 @@ object InputView {
         return Money(readLine()!!.toInt())
     }
 
-    fun receiveWinLottoNumbers(): List<LottoNum> {
+    fun receiveWinLottoNumbers(): List<String> {
         println("지난 주 당첨 번호를 입력해주세요.")
         return readLine()!!.split(", ")
-            .map {
-                LottoNumCache.getLottoNum(
-                    it.toInt()
-                )
-            }
+    }
+
+    fun receiveBonusNumber(): LottoNumber {
+        println("보너스 볼을 입력해주세요.")
+        return LottoNumber.create(readLine()!!.toInt())
     }
 }
