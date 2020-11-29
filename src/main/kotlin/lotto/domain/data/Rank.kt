@@ -22,8 +22,7 @@ enum class Rank(
                 if (isBonusCorrect) return SECOND
                 return THIRD
             }
-            return values().find { it.hasCorrectNum(correctNum) }
-                ?: MISS
+            return values().find { it.hasCorrectNum(correctNum) } ?: MISS
         }
     }
 }

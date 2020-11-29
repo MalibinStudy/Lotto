@@ -31,6 +31,16 @@ internal class LottoTest {
         assertThat(purchasedLotto.getWinnerByCompare(otherLotto, bonusNum)).isEqualTo(Rank.FIFTH)
     }
 
+    @Test
+    fun toStringTest() {
+        // given
+        val purchasedLottoNum = setOf(lottoNum(1), lottoNum(2), lottoNum(3), lottoNum(4), lottoNum(5), lottoNum(6))
+        // when
+        val lotto = Lotto(purchasedLottoNum)
+        // then
+        assertThat(lotto.toString()).isEqualTo("1, 2, 3, 4, 5, 6")
+    }
+
     private fun lottoNum(num: Int): LottoNum {
         return LottoNum.valueOf(num)
     }
