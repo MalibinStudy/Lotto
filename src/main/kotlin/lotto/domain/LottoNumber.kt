@@ -8,6 +8,21 @@ class LottoNumber private constructor(
         return "$number"
     }
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as LottoNumber
+
+        if (number != other.number) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return number
+    }
+
     companion object {
         const val LOTTO_START_NUMBER = 1
         const val LOTTO_END_NUMBER = 45

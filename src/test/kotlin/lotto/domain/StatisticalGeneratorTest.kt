@@ -10,7 +10,7 @@ internal class StatisticalGeneratorTest {
         val lastWeekLottoTicket = LottoTicketGenerator().makeLottoTicket("1,2,3,4,5,6".split(","))
         val lottoStatisticsGenerator = StatisticalGenerator(createLottoTickets())
         // when
-        val statistics = lottoStatisticsGenerator.getStatisticsUse(lastWeekLottoTicket)
+        val statistics = lottoStatisticsGenerator.makeStatisticsUse(lastWeekLottoTicket)
         // than
         assertThat(statistics.countWinningWith(LottoResult.FIRST))
             .isEqualTo(4)

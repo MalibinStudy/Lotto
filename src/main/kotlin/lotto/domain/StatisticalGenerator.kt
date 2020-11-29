@@ -4,9 +4,12 @@ class StatisticalGenerator(
     private val purchasedLottoTickets: PurchasedLottoTickets
 ) {
 
-    fun getStatisticsUse(lastWeekLottoTicket: LottoTicket): LottoStatistics {
+    fun makeStatisticsUse(
+        lastWeekLottoTicket: LottoTicket,
+        bonusNumber: LottoNumber
+    ): LottoStatistics {
         return purchasedLottoTickets.lottoTickets
-            .map { LottoResult.findByMatchNumOf(it.getMatchingCountAbout(lastWeekLottoTicket)) }
+            .map { it.getLottoResultWith(lastWeekLottoTicket, bonusNumber) }
             .groupingBy { it }
             .eachCount()
             .let { LottoStatistics(it) }

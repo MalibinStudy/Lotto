@@ -33,7 +33,7 @@ internal class LottoTicketGeneratorTest {
         // when
         val lottoTicket = LottoTicketGenerator().makeLottoTicket(inputLastWeekLottoNumbers)
         // than
-        assertThat(inputLottoTicket.getMatchingCountAbout(lottoTicket))
+        assertThat(inputLottoTicket.getLottoResultWith(lottoTicket))
             .isEqualTo(6)
     }
 }

@@ -35,7 +35,7 @@ internal class LottoTicketTest {
         // given
         val lastWeekWinLottoTicket = LottoTicket((1..6).map { LottoNumber.valueOf(it) })
         // than
-        assertThat(lottoTicket.getMatchingCountAbout(lastWeekWinLottoTicket))
+        assertThat(lottoTicket.getLottoResultWith(lastWeekWinLottoTicket))
             .isEqualTo(matchCount)
     }
 
