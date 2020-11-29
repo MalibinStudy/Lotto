@@ -1,9 +1,10 @@
 package lotto
 
-import lotto.domain.LottoCashier
-import lotto.domain.LottoNum.Companion.LOTTO_NUM_RANGE
-import lotto.domain.LottoScoringMachine
+import lotto.domain.LottoNumber
+import lotto.domain.LottoNumber.Companion.LOTTO_NUM_RANGE
 import lotto.domain.LottoTicket
+import lotto.domain.LottoTicketMachine
+import lotto.view.InputView.receiveBonusNumber
 import lotto.view.InputView.receiveMoney
 import lotto.view.InputView.receiveWinLottoNumbers
 import lotto.view.OutputView.printLottoCount
@@ -13,14 +14,15 @@ import lotto.view.OutputView.printProfitRate
 
 fun main() {
     val money = receiveMoney()
-    val lottoCashier = LottoCashier { LOTTO_NUM_RANGE.random() }
-    val lottoCount = lottoCashier.calculateLottoCount(money)
+    val lottoCount = money.getAffordableGoodsCount(LottoTicket.LOTTO_PRICE)
     printLottoCount(lottoCount)
-    val lottoTickets = lottoCashier.getLotto(lottoCount)
+    val lottoTickets = LottoTicketMachine { LOTTO_NUM_RANGE.random() }.make(lottoCount)
     printLottos(lottoTickets)
 
-    val winLotto = LottoTicket(receiveWinLottoNumbers())
-    val winLottoStatistics = LottoScoringMachine.scoreLottoTickets(winLotto, lottoTickets)
+    val lottoNumbers = receiveWinLottoNumbers().map { LottoNumber.create(it.toInt()) }
+    val winLottoTicket = LottoTicket(lottoNumbers)
+    val bonusNumber = receiveBonusNumber()
+    val winLottoStatistics = lottoTickets.score(winLottoTicket, bonusNumber)
     printLottoScore(winLottoStatistics)
 
     val profitRate = winLottoStatistics.getProfitRate(money)
