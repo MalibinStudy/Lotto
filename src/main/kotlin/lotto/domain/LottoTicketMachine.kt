@@ -1,15 +1,23 @@
 package lotto.domain
 
 import lotto.domai.RandomNumGenerator
-import lotto.domain.LottoTicket.Companion.LOTTO_TICKET_LENGTH
 
 class LottoTicketMachine(private val randomNumGenerator: RandomNumGenerator) {
+
     fun make(): LottoTicket {
-        val lottoNums = (1..LOTTO_TICKET_LENGTH).map {
-            LottoNumCache.getLottoNum(
-                randomNumGenerator.generate()
-            )
+        val lottoNumbers = mutableListOf<LottoNumber>()
+        while (lottoNumbers.size < LottoTicket.LOTTO_TICKET_LENGTH) {
+            val candidateNumber = LottoNumber.create(randomNumGenerator.generate())
+            if (!lottoNumbers.contains(candidateNumber)) {
+                lottoNumbers.add(candidateNumber)
+            }
         }
-        return LottoTicket(lottoNums)
+        return LottoTicket(lottoNumbers)
+    }
+
+    fun make(count: Int): LottoTickets {
+        return LottoTickets(
+            List(count) { make() }
+        )
     }
 }
