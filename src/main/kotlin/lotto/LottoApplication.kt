@@ -9,8 +9,7 @@ fun main() {
     val inputView = InputView()
     val inputChanger = InputChanger()
 
-    val purchaseCostInput = inputView.getPurchaseCost()
-    val purchaseCost = inputChanger.toMoney(purchaseCostInput)
+    val purchaseCost = inputChanger.toMoney(inputView.getPurchaseCost())
 
     val lottoNumGenerator = LottoNumGenerator()
     val lottoMachine = LottoMachine()
@@ -19,9 +18,10 @@ fun main() {
     val resultView = ResultView()
     resultView.showLottos(purchasedLottos)
 
-    val winningLottoInput = inputView.requestWinningLotto()
-    val winningLotto = inputChanger.toLotto(winningLottoInput)
-    val winLottos = purchasedLottos.resultOfWin(winningLotto)
+    val winningLotto = inputChanger.toLotto(inputView.requestWinningLotto())
+    val bonusNum = inputChanger.toBonusLottoNum(inputView.requestBonusNum(), winningLotto)
+
+    val winLottos = purchasedLottos.resultOfWin(winningLotto, bonusNum)
 
     val profitCalculator = ProfitCalculator()
     val profitRatio = profitCalculator.getProfitRatio(purchaseCost, winLottos)

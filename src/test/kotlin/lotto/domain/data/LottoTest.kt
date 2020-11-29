@@ -10,25 +10,38 @@ internal class LottoTest {
     @DisplayName("로또 번호 6개가 들어왔는지 검사")
     @Test
     fun lottoNumTest() {
-        val lottoNums = setOf(LottoNum(1), LottoNum(2), LottoNum(3), LottoNum(4), LottoNum(5), LottoNum(5))
+        val lottoNums = setOf(lottoNum(1), lottoNum(2), lottoNum(3), lottoNum(4), lottoNum(5), lottoNum(5))
         // then
         Assertions.assertThatThrownBy { Lotto(lottoNums) }
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage("로또 번호가 잘못 만들어졌어요 $lottoNums")
     }
 
-    @DisplayName("다른 로또와 비교하여 일치하는 WinLotto 반환 테스트")
+    @DisplayName("다른 로또와 비교하여 일치하는 Rank 반환 테스트")
     @Test
-    fun getCorrectNumCompareToOtherTest() {
+    fun getWinnerByCompareTest() {
         // given
-        val purchasedLottoNum = setOf(LottoNum(1), LottoNum(2), LottoNum(3), LottoNum(4), LottoNum(5), LottoNum(6))
-        val otherLottoNum = setOf(LottoNum(1), LottoNum(3), LottoNum(5), LottoNum(7), LottoNum(9), LottoNum(11))
-
+        val purchasedLottoNum = setOf(lottoNum(1), lottoNum(2), lottoNum(3), lottoNum(4), lottoNum(5), lottoNum(6))
+        val otherLottoNum = setOf(lottoNum(1), lottoNum(3), lottoNum(5), lottoNum(7), lottoNum(9), lottoNum(11))
+        val bonusNum = lottoNum(2)
         // when
         val purchasedLotto = Lotto(purchasedLottoNum)
         val otherLotto = Lotto(otherLottoNum)
-
         // then
-        assertThat(purchasedLotto.getWinnerByCompare(otherLotto).correctNum).isEqualTo(3)
+        assertThat(purchasedLotto.getWinnerByCompare(otherLotto, bonusNum)).isEqualTo(Rank.FIFTH)
+    }
+
+    @Test
+    fun toStringTest() {
+        // given
+        val purchasedLottoNum = setOf(lottoNum(1), lottoNum(2), lottoNum(3), lottoNum(4), lottoNum(5), lottoNum(6))
+        // when
+        val lotto = Lotto(purchasedLottoNum)
+        // then
+        assertThat(lotto.toString()).isEqualTo("1, 2, 3, 4, 5, 6")
+    }
+
+    private fun lottoNum(num: Int): LottoNum {
+        return LottoNum.valueOf(num)
     }
 }
