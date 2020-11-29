@@ -14,9 +14,9 @@ class WinLottoStatisticsTest {
                 WinLottoTicket::class.java
             )
         )
-        lottoScore.increaseLottoCount(
-            WinLottoTicket.findInstance(3)
-        )
+        WinLottoTicket.findInstance(3)?.let {
+            lottoScore.increaseLottoCount(it)
+        }
 
         // when
         val profitRate = lottoScore.getProfitRate(money)
