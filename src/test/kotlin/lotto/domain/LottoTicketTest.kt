@@ -9,12 +9,12 @@ internal class LottoTicketTest {
         Assertions.assertThatThrownBy {
             LottoTicket(
                 listOf(
-                    LottoNumber(1),
-                    LottoNumber(1),
-                    LottoNumber(1),
-                    LottoNumber(1),
-                    LottoNumber(1),
-                    LottoNumber(1),
+                    LottoNumber.from(1),
+                    LottoNumber.from(1),
+                    LottoNumber.from(1),
+                    LottoNumber.from(1),
+                    LottoNumber.from(1),
+                    LottoNumber.from(1),
                 )
             )
         }.isInstanceOf(IllegalArgumentException::class.java)
@@ -26,11 +26,11 @@ internal class LottoTicketTest {
         Assertions.assertThatThrownBy {
             LottoTicket(
                 listOf(
-                    LottoNumber(1),
-                    LottoNumber(2),
-                    LottoNumber(3),
-                    LottoNumber(4),
-                    LottoNumber(5),
+                    LottoNumber.from(1),
+                    LottoNumber.from(2),
+                    LottoNumber.from(3),
+                    LottoNumber.from(4),
+                    LottoNumber.from(5),
                 )
             )
         }.isInstanceOf(IllegalArgumentException::class.java)
