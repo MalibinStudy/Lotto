@@ -13,3 +13,9 @@ class WinResult(val lottoBundleResult: List<Int>) {
     fun getSecondPrizeCount() = lottoBundleResult[4]
     fun getFirstPrizeCount() = lottoBundleResult[5]
 }
+
+
+
+
+
+
