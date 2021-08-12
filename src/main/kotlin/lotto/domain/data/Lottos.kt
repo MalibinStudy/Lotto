@@ -5,12 +5,15 @@ import java.util.EnumMap
 data class Lottos(
     val lottos: List<Lotto>
 ) {
-    fun resultOfWin(winningLotto: Lotto): WinResults {
-        val results = EnumMap<LottoResult, Int>(LottoResult::class.java)
-        results[LottoResult.CORRECT_THREE] = lottos.count { it.getWinnerByCompare(winningLotto).correctNum == 3 }
-        results[LottoResult.CORRECT_FOUR] = lottos.count { it.getWinnerByCompare(winningLotto).correctNum == 4 }
-        results[LottoResult.CORRECT_FIVE] = lottos.count { it.getWinnerByCompare(winningLotto).correctNum == 5 }
-        results[LottoResult.CORRECT_SIX] = lottos.count { it.getWinnerByCompare(winningLotto).correctNum == 6 }
+    fun resultOfWin(winningLotto: Lotto, bonusNum: LottoNum): WinResults {
+        val results = EnumMap<Rank, Int>(Rank::class.java)
+        results[Rank.FIRST] = lottos.count { it.getWinnerByCompare(winningLotto, bonusNum) == Rank.FIRST }
+        results[Rank.SECOND] =
+            lottos.count { it.getWinnerByCompare(winningLotto, bonusNum) == Rank.SECOND }
+        results[Rank.THIRD] =
+            lottos.count { it.getWinnerByCompare(winningLotto, bonusNum) == Rank.THIRD }
+        results[Rank.FOURTH] = lottos.count { it.getWinnerByCompare(winningLotto, bonusNum) == Rank.FOURTH }
+        results[Rank.FIFTH] = lottos.count { it.getWinnerByCompare(winningLotto, bonusNum) == Rank.FIFTH }
         return WinResults(results)
     }
 }

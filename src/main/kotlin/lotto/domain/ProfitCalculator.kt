@@ -1,20 +1,16 @@
 package lotto.domain
 
 import lotto.domain.data.Money
+import lotto.domain.data.Rank
 import lotto.domain.data.WinResults
 
 class ProfitCalculator {
-    fun getProfitRatio(purchaseCost: Money, lottosResult: WinResults): Double {
-        val totalProfit = getTotalProfit(lottosResult)
-        return kotlin.math.round(totalProfit / purchaseCost.value * ONE_HUNDRED) / ONE_HUNDRED
-    }
-
-    private fun getTotalProfit(lottosResult: WinResults): Double {
+    fun getProfitRatio(purchaseCost: Money, winResults: WinResults): Double {
         var totalProfit = 0.00
-        lottosResult.result.forEach { (winLOtto, winnerCount) ->
-            totalProfit += (winLOtto.winPrice * winnerCount)
+        repeat(Rank.values().size) {
+            totalProfit += winResults.getProfitAt(Rank.values()[it])
         }
-        return totalProfit
+        return kotlin.math.round(totalProfit / purchaseCost.value * ONE_HUNDRED) / ONE_HUNDRED
     }
 
     companion object {

@@ -12,21 +12,25 @@ class InputChanger {
 
     fun toLotto(numString: String): Lotto {
         val winnerNums = numString.split(DELIMITER)
-        checkWinnerNums(winnerNums)
-        val winLottoNums = winnerNums.map { LottoNum(it.toInt()) }.toSet()
+        val winLottoNums = winnerNums.map { LottoNum.valueOf(it.toInt()) }.toSet()
         return Lotto(winLottoNums)
     }
 
-    private fun checkWinnerNums(winnerNums: List<String>) {
-        require(winnerNums.size == NUM_OF_LOTTO_NUMS) {
-            throw IllegalArgumentException(
-                "당첨 번호를 잘못 입력하셨습니다. \n입력값: $winnerNums \n개수와 띄어쓰기에 유의하여 다음과 같이 입력해주세요 : 1, 2, 5, 7, 14, 23"
-            )
+    fun toBonusLottoNum(numString: String, winningLotto: Lotto): LottoNum {
+        val bonusNum = numString.toInt()
+        checkBonusNumDuplicated(bonusNum, winningLotto)
+        return LottoNum.valueOf(bonusNum)
+    }
+
+    private fun checkBonusNumDuplicated(bonusNum: Int, winningLotto: Lotto) {
+        if (winningLotto.lottoNums.contains(LottoNum.valueOf(bonusNum))) {
+            println("보너스 번호는 당첨번호와 중복될 수 없습니다. 다시 입력해주세요.")
+            val reInputNumString = readLine()!!
+            toBonusLottoNum(reInputNumString, winningLotto)
         }
     }
 
     companion object {
-        const val NUM_OF_LOTTO_NUMS = 6
         const val DELIMITER = ", "
     }
 }
