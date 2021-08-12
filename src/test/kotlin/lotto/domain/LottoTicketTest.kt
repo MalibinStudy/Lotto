@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
+import java.util.stream.Stream
 
 internal class LottoTicketTest {
     @Test
@@ -31,27 +32,43 @@ internal class LottoTicketTest {
 
     @ParameterizedTest
     @MethodSource("provideLottoTicket")
-    fun `두 개의 로또 번호 비교시 matching count 테스트`(lottoTicket: LottoTicket, matchCount: Int) {
+    fun `두 개의 로또 번호 비교시 통계 결과 테스트`(lottoTicket: LottoTicket, bonusNum: Int, result: LottoResult) {
         // given
-        val lastWeekWinLottoTicket = LottoTicket((1..6).map { LottoNumber.valueOf(it) })
+        val lastWeekWinLottoTicket = LottoTicketGenerator.makeLottoTicket(listOf("1", "2", "3", "4", "5", "6"))
         // than
-        assertThat(lottoTicket.getMatchingCountAbout(lastWeekWinLottoTicket))
-            .isEqualTo(matchCount)
+        assertThat(lottoTicket.getLottoResultWith(lastWeekWinLottoTicket, LottoNumber.valueOf(bonusNum)))
+            .isEqualTo(result)
     }
 
     companion object {
         @JvmStatic
-        fun provideLottoTicket(): List<Arguments> {
-            val arguments = mutableListOf<Arguments>()
-            repeat(LottoTicket.LOTTO_NUMBER_COUNT) { repetNum ->
-                arguments.add(
-                    Arguments.of(
-                        LottoTicket((repetNum + 1..repetNum + 6).map { LottoNumber.valueOf(it) }),
-                        6 - repetNum
-                    )
-                )
-            }
-            return arguments.toList()
-        }
+        fun provideLottoTicket(): Stream<Arguments> =
+            Stream.of(
+                Arguments.of(
+                    LottoTicketGenerator.makeLottoTicket(listOf("1", "2", "3", "4", "5", "6")),
+                    9,
+                    LottoResult.FIRST
+                ),
+                Arguments.of(
+                    LottoTicketGenerator.makeLottoTicket(listOf("11", "2", "3", "4", "5", "6")),
+                    11,
+                    LottoResult.SECOND
+                ),
+                Arguments.of(
+                    LottoTicketGenerator.makeLottoTicket(listOf("11", "2", "3", "4", "5", "6")),
+                    9,
+                    LottoResult.THIRD
+                ),
+                Arguments.of(
+                    LottoTicketGenerator.makeLottoTicket(listOf("11", "12", "3", "4", "5", "6")),
+                    9,
+                    LottoResult.FOURTH
+                ),
+                Arguments.of(
+                    LottoTicketGenerator.makeLottoTicket(listOf("11", "12", "13", "4", "5", "6")),
+                    9,
+                    LottoResult.FIFTH
+                ),
+            )
     }
 }

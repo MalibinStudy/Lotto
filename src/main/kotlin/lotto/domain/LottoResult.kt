@@ -2,17 +2,18 @@ package lotto.domain
 
 enum class LottoResult(
     val prize: Long,
-    private val matchNumberStrategy: (matchCount: Int) -> Boolean
+    private val matchNumberStrategy: (matchCount: Int, isBonusMatched: Boolean) -> Boolean
 ) {
-    FIRST(2_000_000_000L, { matchCount -> matchCount == 6 }),
-    SECOND(1_500_000L, { matchCount -> matchCount == 5 }),
-    THIRD(50_000L, { matchCount -> matchCount == 4 }),
-    FOURTH(5_000L, { matchCount -> matchCount == 3 }),
-    LOSE(0L, { _ -> false });
+    FIRST(2_000_000_000L, { matchCount, _ -> matchCount == 6 }),
+    SECOND(30_000_000L, { matchCount, isBonusMatched -> matchCount == 5 && isBonusMatched }),
+    THIRD(1_500_000L, { matchCount, isBonusMatched -> matchCount == 5 && !isBonusMatched }),
+    FOURTH(50_000L, { matchCount, _ -> matchCount == 4 }),
+    FIFTH(5_000L, { matchCount, _ -> matchCount == 3 }),
+    LOSE(0L, { _, _ -> false });
 
     companion object {
-        fun findByMatchNumOf(matchCount: Int): LottoResult {
-            return values().find { it.matchNumberStrategy(matchCount) } ?: LOSE
+        fun findByMatchNumOf(matchCount: Int, matchBonus: Boolean): LottoResult {
+            return values().find { it.matchNumberStrategy(matchCount, matchBonus) } ?: LOSE
         }
     }
 }

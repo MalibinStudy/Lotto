@@ -21,21 +21,32 @@ fun printLastWeekWinningNumbersReqeust() {
     println("지난 주 당첨 번호를 입력해 주세요.")
 }
 
+fun printBonusNumberRequest() {
+    println("보너스 볼을 입력해 주세요.")
+}
+
 fun printLottoStatistics(lottoStatistics: LottoStatistics) {
     println("\n당첨 통계")
     println(CONSOLE_DIVEDER)
-    (3..6).forEach {
-        printLottoResult(
-            it,
-            lottoStatistics.countWinningWith(findLottoResult(it))
-        )
+    LottoResult.values().reversedArray().forEach {
+        printLottoResult(it, lottoStatistics.countWinningWith(it))
     }
 }
 
-private fun findLottoResult(matchCount: Int): LottoResult = LottoResult.findByMatchNumOf(matchCount)
+private fun printLottoResult(result: LottoResult, count: Int) {
+    if (result == LottoResult.LOSE) return
+    if (result == LottoResult.SECOND) {
+        println("5개 일치, 보너스 볼 일치(${result.prize} 원) - ${count}개")
+    }
+    println("${getMatchCount(result)}개 일치 (${result.prize}원) - ${count}개")
+}
 
-private fun printLottoResult(matchCoutn: Int, count: Int) {
-    println("${matchCoutn}개 일치 (${findLottoResult(matchCoutn).prize}원) - ${count}개")
+private fun getMatchCount(result: LottoResult): Int = when (result) {
+    LottoResult.FIRST -> 6
+    LottoResult.SECOND, LottoResult.THIRD -> 5
+    LottoResult.FOURTH -> 4
+    LottoResult.FIFTH -> 3
+    LottoResult.LOSE -> 0
 }
 
 fun printRevenueRatio(ratio: BigDecimal) {

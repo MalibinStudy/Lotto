@@ -6,10 +6,18 @@ import org.junit.jupiter.params.provider.CsvSource
 
 internal class LottoResultTest {
     @ParameterizedTest
-    @CsvSource("6,FIRST", "5,SECOND", "4,THIRD", "3,FOURTH", "2,LOSE", "1,LOSE")
-    fun `match count에 따라 값이 잘 나오는지 테스트`(matchCount: Int, lottoResult: LottoResult) {
+    @CsvSource(
+        "6,FIRST,false",
+        "5,SECOND,true",
+        "5,THIRD,false",
+        "4,FOURTH,false",
+        "3,FIFTH,false",
+        "2,LOSE,false",
+        "1,LOSE,false"
+    )
+    fun `match count, 보너스 번호에 따라 값이 잘 나오는지 테스트`(matchCount: Int, lottoResult: LottoResult, isBonusMatched: Boolean) {
         // than
-        assertThat(LottoResult.findByMatchNumOf(matchCount))
+        assertThat(LottoResult.findByMatchNumOf(matchCount, isBonusMatched))
             .isEqualTo(lottoResult)
     }
 }
