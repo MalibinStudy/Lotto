@@ -7,9 +7,11 @@ object OutputView {
     fun printMyLottoResult(prizeCheckList: PrizeCheckList) {
         val lottoResult = prizeCheckList.getWinningResult()
         println("결과 통계")
-        for (index in 3..6) {
-            println("${index}개 일치: ${lottoResult[index - 2]}")
-        }
+        println("3개 일치: ${lottoResult.getFifthPrizeCount()}개")
+        println("4개 일치: ${lottoResult.getForthPrizeCount()}개")
+        println("5개 일치: ${lottoResult.getThirdPrizeCount()}개")
+        println("5개 일치, 보너스 볼 일치: ${lottoResult.getSecondPrizeCount()}개")
+        println("6개 일치: ${lottoResult.getFirstPrizeCount()}개")
     }
 
     fun printMyGainRate(money: Int, prizeCheckList: PrizeCheckList) {

@@ -9,16 +9,22 @@ internal class LottoBundleTest {
     @ParameterizedTest
     @MethodSource("providerLottoRange")
     fun `로또 전체를 체크 하는데`(range: IntRange, lottoTicket: LottoTicket) {
-        val lottoBundle = LottoShop()
-            .installDrawingMachine(DrawingMachine(range))
-            .sellsLottoTickets(4000)
+        val myLottoMachine = DrawingMethod {
+            LottoTicket(
+                range.shuffled()
+                    .take(7)
+                    .map { LottoNumber.from(it) }
+                    .sortedBy { it.lottoNumber }
+            )
+        }
+        val lottoBundle = LottoShop(myLottoMachine).sellsLottoTickets(4000)
 
         assertThat(
             lottoBundle.check(lottoTicket).prizeCheckList == listOf(
-                LotteryWinningCriteria.LOSING_TICKET,
-                LotteryWinningCriteria.LOSING_TICKET,
-                LotteryWinningCriteria.LOSING_TICKET,
-                LotteryWinningCriteria.LOSING_TICKET,
+                Rank.LOSING_TICKET,
+                Rank.LOSING_TICKET,
+                Rank.LOSING_TICKET,
+                Rank.LOSING_TICKET,
             )
         )
     }
@@ -27,15 +33,16 @@ internal class LottoBundleTest {
         @JvmStatic
         fun providerLottoRange() = listOf(
             Arguments.of(
-                (20..25),
+                (20..26),
                 LottoTicket(
                     listOf(
-                        LottoNumber(1),
-                        LottoNumber(2),
-                        LottoNumber(3),
-                        LottoNumber(4),
-                        LottoNumber(5),
-                        LottoNumber(6),
+                        LottoNumber.from(1),
+                        LottoNumber.from(2),
+                        LottoNumber.from(3),
+                        LottoNumber.from(4),
+                        LottoNumber.from(5),
+                        LottoNumber.from(6),
+                        LottoNumber.from(7),
                     )
                 )
             )
